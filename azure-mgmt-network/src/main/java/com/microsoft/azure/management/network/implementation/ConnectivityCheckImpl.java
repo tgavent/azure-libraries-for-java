@@ -10,6 +10,8 @@ import com.microsoft.azure.management.network.ConnectionStatus;
 import com.microsoft.azure.management.network.ConnectivityCheck;
 import com.microsoft.azure.management.network.ConnectivityDestination;
 import com.microsoft.azure.management.network.ConnectivityHop;
+import com.microsoft.azure.management.network.ConnectivityInformation;
+import com.microsoft.azure.management.network.ConnectivityParameters;
 import com.microsoft.azure.management.network.ConnectivitySource;
 import com.microsoft.azure.management.network.model.HasNetworkInterfaces;
 import com.microsoft.azure.management.resources.fluentcore.model.implementation.ExecutableImpl;
@@ -27,8 +29,8 @@ public class ConnectivityCheckImpl extends ExecutableImpl<ConnectivityCheck>
         implements ConnectivityCheck, ConnectivityCheck.Definition {
 
     private final NetworkWatcherImpl parent;
-    private ConnectivityParametersInner parameters = new ConnectivityParametersInner();
-    private ConnectivityInformationInner result;
+    private ConnectivityParameters parameters = new ConnectivityParameters();
+    private ConnectivityInformation result;
 
     ConnectivityCheckImpl(NetworkWatcherImpl parent) {
         this.parent = parent;
@@ -128,9 +130,9 @@ public class ConnectivityCheckImpl extends ExecutableImpl<ConnectivityCheck>
     public Observable<ConnectivityCheck> executeWorkAsync() {
         return this.parent().manager().inner().networkWatchers()
                 .checkConnectivityAsync(parent.resourceGroupName(), parent.name(), parameters)
-                .map(new Func1<ConnectivityInformationInner, ConnectivityCheck>() {
+                .map(new Func1<ConnectivityInformation, ConnectivityCheck>() {
                     @Override
-                    public ConnectivityCheck call(ConnectivityInformationInner connectivityInformation) {
+                    public ConnectivityCheck call(ConnectivityInformation connectivityInformation) {
                         ConnectivityCheckImpl.this.result = connectivityInformation;
                         return ConnectivityCheckImpl.this;
                     }

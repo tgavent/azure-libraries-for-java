@@ -54,7 +54,7 @@ public class SecurityRuleInner extends SubResource {
      * and 'Internet' can also be used. If this is an ingress rule, specifies
      * where network traffic originates from.
      */
-    @JsonProperty(value = "properties.sourceAddressPrefix", required = true)
+    @JsonProperty(value = "properties.sourceAddressPrefix")
     private String sourceAddressPrefix;
 
     /**
@@ -68,7 +68,7 @@ public class SecurityRuleInner extends SubResource {
      * '*' can also be used to match all source IPs. Default tags such as
      * 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used.
      */
-    @JsonProperty(value = "properties.destinationAddressPrefix", required = true)
+    @JsonProperty(value = "properties.destinationAddressPrefix")
     private String destinationAddressPrefix;
 
     /**

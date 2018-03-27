@@ -151,6 +151,19 @@ public class NetworkManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The AvailableEndpointServicesInner object to access its operations.
+     */
+    private AvailableEndpointServicesInner availableEndpointServices;
+
+    /**
+     * Gets the AvailableEndpointServicesInner object to access its operations.
+     * @return the AvailableEndpointServicesInner object.
+     */
+    public AvailableEndpointServicesInner availableEndpointServices() {
+        return this.availableEndpointServices;
+    }
+
+    /**
      * The ExpressRouteCircuitAuthorizationsInner object to access its operations.
      */
     private ExpressRouteCircuitAuthorizationsInner expressRouteCircuitAuthorizations;
@@ -601,6 +614,7 @@ public class NetworkManagementClientImpl extends AzureServiceClient {
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.applicationGateways = new ApplicationGatewaysInner(restClient().retrofit(), this);
+        this.availableEndpointServices = new AvailableEndpointServicesInner(restClient().retrofit(), this);
         this.expressRouteCircuitAuthorizations = new ExpressRouteCircuitAuthorizationsInner(restClient().retrofit(), this);
         this.expressRouteCircuitPeerings = new ExpressRouteCircuitPeeringsInner(restClient().retrofit(), this);
         this.expressRouteCircuits = new ExpressRouteCircuitsInner(restClient().retrofit(), this);
@@ -663,78 +677,7 @@ public class NetworkManagementClientImpl extends AzureServiceClient {
     }
 
     /**
-     * Checks whether a domain name in the cloudapp.net zone is available for use.
-     *
-     * @param location The location of the domain name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the DnsNameAvailabilityResultInner object if successful.
-     */
-    public DnsNameAvailabilityResultInner checkDnsNameAvailability(String location) {
-        return checkDnsNameAvailabilityWithServiceResponseAsync(location).toBlocking().single().body();
-    }
-
-    /**
-     * Checks whether a domain name in the cloudapp.net zone is available for use.
-     *
-     * @param location The location of the domain name.
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<DnsNameAvailabilityResultInner> checkDnsNameAvailabilityAsync(String location, final ServiceCallback<DnsNameAvailabilityResultInner> serviceCallback) {
-        return ServiceFuture.fromResponse(checkDnsNameAvailabilityWithServiceResponseAsync(location), serviceCallback);
-    }
-
-    /**
-     * Checks whether a domain name in the cloudapp.net zone is available for use.
-     *
-     * @param location The location of the domain name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DnsNameAvailabilityResultInner object
-     */
-    public Observable<DnsNameAvailabilityResultInner> checkDnsNameAvailabilityAsync(String location) {
-        return checkDnsNameAvailabilityWithServiceResponseAsync(location).map(new Func1<ServiceResponse<DnsNameAvailabilityResultInner>, DnsNameAvailabilityResultInner>() {
-            @Override
-            public DnsNameAvailabilityResultInner call(ServiceResponse<DnsNameAvailabilityResultInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Checks whether a domain name in the cloudapp.net zone is available for use.
-     *
-     * @param location The location of the domain name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DnsNameAvailabilityResultInner object
-     */
-    public Observable<ServiceResponse<DnsNameAvailabilityResultInner>> checkDnsNameAvailabilityWithServiceResponseAsync(String location) {
-        if (location == null) {
-            throw new IllegalArgumentException("Parameter location is required and cannot be null.");
-        }
-        if (this.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
-        }
-        final String apiVersion = "2017-08-01";
-        final String domainNameLabel = null;
-        return service.checkDnsNameAvailability(location, this.subscriptionId(), domainNameLabel, apiVersion, this.acceptLanguage(), this.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DnsNameAvailabilityResultInner>>>() {
-                @Override
-                public Observable<ServiceResponse<DnsNameAvailabilityResultInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<DnsNameAvailabilityResultInner> clientResponse = checkDnsNameAvailabilityDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    /**
-     * Checks whether a domain name in the cloudapp.net zone is available for use.
+     * Checks whether a domain name in the cloudapp.azure.com zone is available for use.
      *
      * @param location The location of the domain name.
      * @param domainNameLabel The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$.
@@ -748,7 +691,7 @@ public class NetworkManagementClientImpl extends AzureServiceClient {
     }
 
     /**
-     * Checks whether a domain name in the cloudapp.net zone is available for use.
+     * Checks whether a domain name in the cloudapp.azure.com zone is available for use.
      *
      * @param location The location of the domain name.
      * @param domainNameLabel The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$.
@@ -761,7 +704,7 @@ public class NetworkManagementClientImpl extends AzureServiceClient {
     }
 
     /**
-     * Checks whether a domain name in the cloudapp.net zone is available for use.
+     * Checks whether a domain name in the cloudapp.azure.com zone is available for use.
      *
      * @param location The location of the domain name.
      * @param domainNameLabel The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$.
@@ -778,7 +721,7 @@ public class NetworkManagementClientImpl extends AzureServiceClient {
     }
 
     /**
-     * Checks whether a domain name in the cloudapp.net zone is available for use.
+     * Checks whether a domain name in the cloudapp.azure.com zone is available for use.
      *
      * @param location The location of the domain name.
      * @param domainNameLabel The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$.
@@ -791,6 +734,9 @@ public class NetworkManagementClientImpl extends AzureServiceClient {
         }
         if (this.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
+        }
+        if (domainNameLabel == null) {
+            throw new IllegalArgumentException("Parameter domainNameLabel is required and cannot be null.");
         }
         final String apiVersion = "2017-08-01";
         return service.checkDnsNameAvailability(location, this.subscriptionId(), domainNameLabel, apiVersion, this.acceptLanguage(), this.userAgent())

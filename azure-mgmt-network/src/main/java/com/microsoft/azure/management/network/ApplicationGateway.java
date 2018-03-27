@@ -53,7 +53,7 @@ public interface ApplicationGateway extends
      */
     @Method
     @Beta(SinceVersion.V1_4_0)
-    Map<String, ApplicationGatewayBackendHealth> checkBackendHealth();
+    Map<String, ApplicationGatewayBackendHealthInterface> checkBackendHealth();
 
     /**
      * Checks the backend health asynchronously.
@@ -61,7 +61,7 @@ public interface ApplicationGateway extends
      */
     @Method
     @Beta(SinceVersion.V1_4_0)
-    Observable<Map<String, ApplicationGatewayBackendHealth>> checkBackendHealthAsync();
+    Observable<Map<String, ApplicationGatewayBackendHealthInterface>> checkBackendHealthAsync();
 
     /**
      * Stops the application gateway.

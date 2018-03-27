@@ -14,10 +14,16 @@ import com.microsoft.azure.management.resources.fluentcore.collection.InnerSuppo
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
+import com.microsoft.azure.management.network.ConnectivityInformation;
+import com.microsoft.azure.management.network.ConnectivityParameters;
 import com.microsoft.azure.management.network.FlowLogStatusParameters;
+import com.microsoft.azure.management.network.NextHopParameters;
 import com.microsoft.azure.management.network.QueryTroubleshootingParameters;
 import com.microsoft.azure.management.network.SecurityGroupViewParameters;
 import com.microsoft.azure.management.network.TopologyParameters;
+import com.microsoft.azure.management.network.TroubleshootingParameters;
+import com.microsoft.azure.management.network.VerificationIPFlowParameters;
+import com.microsoft.azure.management.network.VerificationIPFlowResult;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
 import com.microsoft.rest.ServiceCallback;
@@ -96,19 +102,19 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.NetworkWatchers verifyIPFlow" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/ipFlowVerify")
-        Observable<Response<ResponseBody>> verifyIPFlow(@Path("resourceGroupName") String resourceGroupName, @Path("networkWatcherName") String networkWatcherName, @Path("subscriptionId") String subscriptionId, @Body VerificationIPFlowParametersInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> verifyIPFlow(@Path("resourceGroupName") String resourceGroupName, @Path("networkWatcherName") String networkWatcherName, @Path("subscriptionId") String subscriptionId, @Body VerificationIPFlowParameters parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.NetworkWatchers beginVerifyIPFlow" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/ipFlowVerify")
-        Observable<Response<ResponseBody>> beginVerifyIPFlow(@Path("resourceGroupName") String resourceGroupName, @Path("networkWatcherName") String networkWatcherName, @Path("subscriptionId") String subscriptionId, @Body VerificationIPFlowParametersInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginVerifyIPFlow(@Path("resourceGroupName") String resourceGroupName, @Path("networkWatcherName") String networkWatcherName, @Path("subscriptionId") String subscriptionId, @Body VerificationIPFlowParameters parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.NetworkWatchers getNextHop" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/nextHop")
-        Observable<Response<ResponseBody>> getNextHop(@Path("resourceGroupName") String resourceGroupName, @Path("networkWatcherName") String networkWatcherName, @Path("subscriptionId") String subscriptionId, @Body NextHopParametersInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getNextHop(@Path("resourceGroupName") String resourceGroupName, @Path("networkWatcherName") String networkWatcherName, @Path("subscriptionId") String subscriptionId, @Body NextHopParameters parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.NetworkWatchers beginGetNextHop" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/nextHop")
-        Observable<Response<ResponseBody>> beginGetNextHop(@Path("resourceGroupName") String resourceGroupName, @Path("networkWatcherName") String networkWatcherName, @Path("subscriptionId") String subscriptionId, @Body NextHopParametersInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginGetNextHop(@Path("resourceGroupName") String resourceGroupName, @Path("networkWatcherName") String networkWatcherName, @Path("subscriptionId") String subscriptionId, @Body NextHopParameters parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.NetworkWatchers getVMSecurityRules" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/securityGroupView")
@@ -120,11 +126,11 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.NetworkWatchers getTroubleshooting" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/troubleshoot")
-        Observable<Response<ResponseBody>> getTroubleshooting(@Path("resourceGroupName") String resourceGroupName, @Path("networkWatcherName") String networkWatcherName, @Path("subscriptionId") String subscriptionId, @Body TroubleshootingParametersInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getTroubleshooting(@Path("resourceGroupName") String resourceGroupName, @Path("networkWatcherName") String networkWatcherName, @Path("subscriptionId") String subscriptionId, @Body TroubleshootingParameters parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.NetworkWatchers beginGetTroubleshooting" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/troubleshoot")
-        Observable<Response<ResponseBody>> beginGetTroubleshooting(@Path("resourceGroupName") String resourceGroupName, @Path("networkWatcherName") String networkWatcherName, @Path("subscriptionId") String subscriptionId, @Body TroubleshootingParametersInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginGetTroubleshooting(@Path("resourceGroupName") String resourceGroupName, @Path("networkWatcherName") String networkWatcherName, @Path("subscriptionId") String subscriptionId, @Body TroubleshootingParameters parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.NetworkWatchers getTroubleshootingResult" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/queryTroubleshootResult")
@@ -152,11 +158,11 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.NetworkWatchers checkConnectivity" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectivityCheck")
-        Observable<Response<ResponseBody>> checkConnectivity(@Path("resourceGroupName") String resourceGroupName, @Path("networkWatcherName") String networkWatcherName, @Path("subscriptionId") String subscriptionId, @Body ConnectivityParametersInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> checkConnectivity(@Path("resourceGroupName") String resourceGroupName, @Path("networkWatcherName") String networkWatcherName, @Path("subscriptionId") String subscriptionId, @Body ConnectivityParameters parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.NetworkWatchers beginCheckConnectivity" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectivityCheck")
-        Observable<Response<ResponseBody>> beginCheckConnectivity(@Path("resourceGroupName") String resourceGroupName, @Path("networkWatcherName") String networkWatcherName, @Path("subscriptionId") String subscriptionId, @Body ConnectivityParametersInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginCheckConnectivity(@Path("resourceGroupName") String resourceGroupName, @Path("networkWatcherName") String networkWatcherName, @Path("subscriptionId") String subscriptionId, @Body ConnectivityParameters parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -746,9 +752,9 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the VerificationIPFlowResultInner object if successful.
+     * @return the VerificationIPFlowResult object if successful.
      */
-    public VerificationIPFlowResultInner verifyIPFlow(String resourceGroupName, String networkWatcherName, VerificationIPFlowParametersInner parameters) {
+    public VerificationIPFlowResult verifyIPFlow(String resourceGroupName, String networkWatcherName, VerificationIPFlowParameters parameters) {
         return verifyIPFlowWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).toBlocking().last().body();
     }
 
@@ -762,7 +768,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<VerificationIPFlowResultInner> verifyIPFlowAsync(String resourceGroupName, String networkWatcherName, VerificationIPFlowParametersInner parameters, final ServiceCallback<VerificationIPFlowResultInner> serviceCallback) {
+    public ServiceFuture<VerificationIPFlowResult> verifyIPFlowAsync(String resourceGroupName, String networkWatcherName, VerificationIPFlowParameters parameters, final ServiceCallback<VerificationIPFlowResult> serviceCallback) {
         return ServiceFuture.fromResponse(verifyIPFlowWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters), serviceCallback);
     }
 
@@ -775,10 +781,10 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<VerificationIPFlowResultInner> verifyIPFlowAsync(String resourceGroupName, String networkWatcherName, VerificationIPFlowParametersInner parameters) {
-        return verifyIPFlowWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).map(new Func1<ServiceResponse<VerificationIPFlowResultInner>, VerificationIPFlowResultInner>() {
+    public Observable<VerificationIPFlowResult> verifyIPFlowAsync(String resourceGroupName, String networkWatcherName, VerificationIPFlowParameters parameters) {
+        return verifyIPFlowWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).map(new Func1<ServiceResponse<VerificationIPFlowResult>, VerificationIPFlowResult>() {
             @Override
-            public VerificationIPFlowResultInner call(ServiceResponse<VerificationIPFlowResultInner> response) {
+            public VerificationIPFlowResult call(ServiceResponse<VerificationIPFlowResult> response) {
                 return response.body();
             }
         });
@@ -793,7 +799,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<VerificationIPFlowResultInner>> verifyIPFlowWithServiceResponseAsync(String resourceGroupName, String networkWatcherName, VerificationIPFlowParametersInner parameters) {
+    public Observable<ServiceResponse<VerificationIPFlowResult>> verifyIPFlowWithServiceResponseAsync(String resourceGroupName, String networkWatcherName, VerificationIPFlowParameters parameters) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -809,7 +815,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
         Validator.validate(parameters);
         final String apiVersion = "2017-08-01";
         Observable<Response<ResponseBody>> observable = service.verifyIPFlow(resourceGroupName, networkWatcherName, this.client.subscriptionId(), parameters, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<VerificationIPFlowResultInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<VerificationIPFlowResult>() { }.getType());
     }
 
     /**
@@ -821,9 +827,9 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the VerificationIPFlowResultInner object if successful.
+     * @return the VerificationIPFlowResult object if successful.
      */
-    public VerificationIPFlowResultInner beginVerifyIPFlow(String resourceGroupName, String networkWatcherName, VerificationIPFlowParametersInner parameters) {
+    public VerificationIPFlowResult beginVerifyIPFlow(String resourceGroupName, String networkWatcherName, VerificationIPFlowParameters parameters) {
         return beginVerifyIPFlowWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).toBlocking().single().body();
     }
 
@@ -837,7 +843,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<VerificationIPFlowResultInner> beginVerifyIPFlowAsync(String resourceGroupName, String networkWatcherName, VerificationIPFlowParametersInner parameters, final ServiceCallback<VerificationIPFlowResultInner> serviceCallback) {
+    public ServiceFuture<VerificationIPFlowResult> beginVerifyIPFlowAsync(String resourceGroupName, String networkWatcherName, VerificationIPFlowParameters parameters, final ServiceCallback<VerificationIPFlowResult> serviceCallback) {
         return ServiceFuture.fromResponse(beginVerifyIPFlowWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters), serviceCallback);
     }
 
@@ -848,12 +854,12 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @param networkWatcherName The name of the network watcher.
      * @param parameters Parameters that define the IP flow to be verified.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the VerificationIPFlowResultInner object
+     * @return the observable to the VerificationIPFlowResult object
      */
-    public Observable<VerificationIPFlowResultInner> beginVerifyIPFlowAsync(String resourceGroupName, String networkWatcherName, VerificationIPFlowParametersInner parameters) {
-        return beginVerifyIPFlowWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).map(new Func1<ServiceResponse<VerificationIPFlowResultInner>, VerificationIPFlowResultInner>() {
+    public Observable<VerificationIPFlowResult> beginVerifyIPFlowAsync(String resourceGroupName, String networkWatcherName, VerificationIPFlowParameters parameters) {
+        return beginVerifyIPFlowWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).map(new Func1<ServiceResponse<VerificationIPFlowResult>, VerificationIPFlowResult>() {
             @Override
-            public VerificationIPFlowResultInner call(ServiceResponse<VerificationIPFlowResultInner> response) {
+            public VerificationIPFlowResult call(ServiceResponse<VerificationIPFlowResult> response) {
                 return response.body();
             }
         });
@@ -866,9 +872,9 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @param networkWatcherName The name of the network watcher.
      * @param parameters Parameters that define the IP flow to be verified.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the VerificationIPFlowResultInner object
+     * @return the observable to the VerificationIPFlowResult object
      */
-    public Observable<ServiceResponse<VerificationIPFlowResultInner>> beginVerifyIPFlowWithServiceResponseAsync(String resourceGroupName, String networkWatcherName, VerificationIPFlowParametersInner parameters) {
+    public Observable<ServiceResponse<VerificationIPFlowResult>> beginVerifyIPFlowWithServiceResponseAsync(String resourceGroupName, String networkWatcherName, VerificationIPFlowParameters parameters) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -884,11 +890,11 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
         Validator.validate(parameters);
         final String apiVersion = "2017-08-01";
         return service.beginVerifyIPFlow(resourceGroupName, networkWatcherName, this.client.subscriptionId(), parameters, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<VerificationIPFlowResultInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<VerificationIPFlowResult>>>() {
                 @Override
-                public Observable<ServiceResponse<VerificationIPFlowResultInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<VerificationIPFlowResult>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<VerificationIPFlowResultInner> clientResponse = beginVerifyIPFlowDelegate(response);
+                        ServiceResponse<VerificationIPFlowResult> clientResponse = beginVerifyIPFlowDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -897,10 +903,10 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
             });
     }
 
-    private ServiceResponse<VerificationIPFlowResultInner> beginVerifyIPFlowDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<VerificationIPFlowResultInner, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<VerificationIPFlowResultInner>() { }.getType())
-                .register(202, new TypeToken<VerificationIPFlowResultInner>() { }.getType())
+    private ServiceResponse<VerificationIPFlowResult> beginVerifyIPFlowDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<VerificationIPFlowResult, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<VerificationIPFlowResult>() { }.getType())
+                .register(202, new TypeToken<VerificationIPFlowResult>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -916,7 +922,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the NextHopResultInner object if successful.
      */
-    public NextHopResultInner getNextHop(String resourceGroupName, String networkWatcherName, NextHopParametersInner parameters) {
+    public NextHopResultInner getNextHop(String resourceGroupName, String networkWatcherName, NextHopParameters parameters) {
         return getNextHopWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).toBlocking().last().body();
     }
 
@@ -930,7 +936,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<NextHopResultInner> getNextHopAsync(String resourceGroupName, String networkWatcherName, NextHopParametersInner parameters, final ServiceCallback<NextHopResultInner> serviceCallback) {
+    public ServiceFuture<NextHopResultInner> getNextHopAsync(String resourceGroupName, String networkWatcherName, NextHopParameters parameters, final ServiceCallback<NextHopResultInner> serviceCallback) {
         return ServiceFuture.fromResponse(getNextHopWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters), serviceCallback);
     }
 
@@ -943,7 +949,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<NextHopResultInner> getNextHopAsync(String resourceGroupName, String networkWatcherName, NextHopParametersInner parameters) {
+    public Observable<NextHopResultInner> getNextHopAsync(String resourceGroupName, String networkWatcherName, NextHopParameters parameters) {
         return getNextHopWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).map(new Func1<ServiceResponse<NextHopResultInner>, NextHopResultInner>() {
             @Override
             public NextHopResultInner call(ServiceResponse<NextHopResultInner> response) {
@@ -961,7 +967,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<NextHopResultInner>> getNextHopWithServiceResponseAsync(String resourceGroupName, String networkWatcherName, NextHopParametersInner parameters) {
+    public Observable<ServiceResponse<NextHopResultInner>> getNextHopWithServiceResponseAsync(String resourceGroupName, String networkWatcherName, NextHopParameters parameters) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -991,7 +997,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the NextHopResultInner object if successful.
      */
-    public NextHopResultInner beginGetNextHop(String resourceGroupName, String networkWatcherName, NextHopParametersInner parameters) {
+    public NextHopResultInner beginGetNextHop(String resourceGroupName, String networkWatcherName, NextHopParameters parameters) {
         return beginGetNextHopWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).toBlocking().single().body();
     }
 
@@ -1005,7 +1011,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<NextHopResultInner> beginGetNextHopAsync(String resourceGroupName, String networkWatcherName, NextHopParametersInner parameters, final ServiceCallback<NextHopResultInner> serviceCallback) {
+    public ServiceFuture<NextHopResultInner> beginGetNextHopAsync(String resourceGroupName, String networkWatcherName, NextHopParameters parameters, final ServiceCallback<NextHopResultInner> serviceCallback) {
         return ServiceFuture.fromResponse(beginGetNextHopWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters), serviceCallback);
     }
 
@@ -1018,7 +1024,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the NextHopResultInner object
      */
-    public Observable<NextHopResultInner> beginGetNextHopAsync(String resourceGroupName, String networkWatcherName, NextHopParametersInner parameters) {
+    public Observable<NextHopResultInner> beginGetNextHopAsync(String resourceGroupName, String networkWatcherName, NextHopParameters parameters) {
         return beginGetNextHopWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).map(new Func1<ServiceResponse<NextHopResultInner>, NextHopResultInner>() {
             @Override
             public NextHopResultInner call(ServiceResponse<NextHopResultInner> response) {
@@ -1036,7 +1042,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the NextHopResultInner object
      */
-    public Observable<ServiceResponse<NextHopResultInner>> beginGetNextHopWithServiceResponseAsync(String resourceGroupName, String networkWatcherName, NextHopParametersInner parameters) {
+    public Observable<ServiceResponse<NextHopResultInner>> beginGetNextHopWithServiceResponseAsync(String resourceGroupName, String networkWatcherName, NextHopParameters parameters) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1254,7 +1260,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the TroubleshootingResultInner object if successful.
      */
-    public TroubleshootingResultInner getTroubleshooting(String resourceGroupName, String networkWatcherName, TroubleshootingParametersInner parameters) {
+    public TroubleshootingResultInner getTroubleshooting(String resourceGroupName, String networkWatcherName, TroubleshootingParameters parameters) {
         return getTroubleshootingWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).toBlocking().last().body();
     }
 
@@ -1268,7 +1274,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<TroubleshootingResultInner> getTroubleshootingAsync(String resourceGroupName, String networkWatcherName, TroubleshootingParametersInner parameters, final ServiceCallback<TroubleshootingResultInner> serviceCallback) {
+    public ServiceFuture<TroubleshootingResultInner> getTroubleshootingAsync(String resourceGroupName, String networkWatcherName, TroubleshootingParameters parameters, final ServiceCallback<TroubleshootingResultInner> serviceCallback) {
         return ServiceFuture.fromResponse(getTroubleshootingWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters), serviceCallback);
     }
 
@@ -1281,7 +1287,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<TroubleshootingResultInner> getTroubleshootingAsync(String resourceGroupName, String networkWatcherName, TroubleshootingParametersInner parameters) {
+    public Observable<TroubleshootingResultInner> getTroubleshootingAsync(String resourceGroupName, String networkWatcherName, TroubleshootingParameters parameters) {
         return getTroubleshootingWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).map(new Func1<ServiceResponse<TroubleshootingResultInner>, TroubleshootingResultInner>() {
             @Override
             public TroubleshootingResultInner call(ServiceResponse<TroubleshootingResultInner> response) {
@@ -1299,7 +1305,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<TroubleshootingResultInner>> getTroubleshootingWithServiceResponseAsync(String resourceGroupName, String networkWatcherName, TroubleshootingParametersInner parameters) {
+    public Observable<ServiceResponse<TroubleshootingResultInner>> getTroubleshootingWithServiceResponseAsync(String resourceGroupName, String networkWatcherName, TroubleshootingParameters parameters) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1329,7 +1335,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the TroubleshootingResultInner object if successful.
      */
-    public TroubleshootingResultInner beginGetTroubleshooting(String resourceGroupName, String networkWatcherName, TroubleshootingParametersInner parameters) {
+    public TroubleshootingResultInner beginGetTroubleshooting(String resourceGroupName, String networkWatcherName, TroubleshootingParameters parameters) {
         return beginGetTroubleshootingWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).toBlocking().single().body();
     }
 
@@ -1343,7 +1349,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<TroubleshootingResultInner> beginGetTroubleshootingAsync(String resourceGroupName, String networkWatcherName, TroubleshootingParametersInner parameters, final ServiceCallback<TroubleshootingResultInner> serviceCallback) {
+    public ServiceFuture<TroubleshootingResultInner> beginGetTroubleshootingAsync(String resourceGroupName, String networkWatcherName, TroubleshootingParameters parameters, final ServiceCallback<TroubleshootingResultInner> serviceCallback) {
         return ServiceFuture.fromResponse(beginGetTroubleshootingWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters), serviceCallback);
     }
 
@@ -1356,7 +1362,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the TroubleshootingResultInner object
      */
-    public Observable<TroubleshootingResultInner> beginGetTroubleshootingAsync(String resourceGroupName, String networkWatcherName, TroubleshootingParametersInner parameters) {
+    public Observable<TroubleshootingResultInner> beginGetTroubleshootingAsync(String resourceGroupName, String networkWatcherName, TroubleshootingParameters parameters) {
         return beginGetTroubleshootingWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).map(new Func1<ServiceResponse<TroubleshootingResultInner>, TroubleshootingResultInner>() {
             @Override
             public TroubleshootingResultInner call(ServiceResponse<TroubleshootingResultInner> response) {
@@ -1374,7 +1380,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the TroubleshootingResultInner object
      */
-    public Observable<ServiceResponse<TroubleshootingResultInner>> beginGetTroubleshootingWithServiceResponseAsync(String resourceGroupName, String networkWatcherName, TroubleshootingParametersInner parameters) {
+    public Observable<ServiceResponse<TroubleshootingResultInner>> beginGetTroubleshootingWithServiceResponseAsync(String resourceGroupName, String networkWatcherName, TroubleshootingParameters parameters) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1928,9 +1934,9 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the ConnectivityInformationInner object if successful.
+     * @return the ConnectivityInformation object if successful.
      */
-    public ConnectivityInformationInner checkConnectivity(String resourceGroupName, String networkWatcherName, ConnectivityParametersInner parameters) {
+    public ConnectivityInformation checkConnectivity(String resourceGroupName, String networkWatcherName, ConnectivityParameters parameters) {
         return checkConnectivityWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).toBlocking().last().body();
     }
 
@@ -1944,7 +1950,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ConnectivityInformationInner> checkConnectivityAsync(String resourceGroupName, String networkWatcherName, ConnectivityParametersInner parameters, final ServiceCallback<ConnectivityInformationInner> serviceCallback) {
+    public ServiceFuture<ConnectivityInformation> checkConnectivityAsync(String resourceGroupName, String networkWatcherName, ConnectivityParameters parameters, final ServiceCallback<ConnectivityInformation> serviceCallback) {
         return ServiceFuture.fromResponse(checkConnectivityWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters), serviceCallback);
     }
 
@@ -1957,10 +1963,10 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ConnectivityInformationInner> checkConnectivityAsync(String resourceGroupName, String networkWatcherName, ConnectivityParametersInner parameters) {
-        return checkConnectivityWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).map(new Func1<ServiceResponse<ConnectivityInformationInner>, ConnectivityInformationInner>() {
+    public Observable<ConnectivityInformation> checkConnectivityAsync(String resourceGroupName, String networkWatcherName, ConnectivityParameters parameters) {
+        return checkConnectivityWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).map(new Func1<ServiceResponse<ConnectivityInformation>, ConnectivityInformation>() {
             @Override
-            public ConnectivityInformationInner call(ServiceResponse<ConnectivityInformationInner> response) {
+            public ConnectivityInformation call(ServiceResponse<ConnectivityInformation> response) {
                 return response.body();
             }
         });
@@ -1975,7 +1981,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<ConnectivityInformationInner>> checkConnectivityWithServiceResponseAsync(String resourceGroupName, String networkWatcherName, ConnectivityParametersInner parameters) {
+    public Observable<ServiceResponse<ConnectivityInformation>> checkConnectivityWithServiceResponseAsync(String resourceGroupName, String networkWatcherName, ConnectivityParameters parameters) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1991,7 +1997,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
         Validator.validate(parameters);
         final String apiVersion = "2017-08-01";
         Observable<Response<ResponseBody>> observable = service.checkConnectivity(resourceGroupName, networkWatcherName, this.client.subscriptionId(), parameters, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<ConnectivityInformationInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<ConnectivityInformation>() { }.getType());
     }
 
     /**
@@ -2003,9 +2009,9 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the ConnectivityInformationInner object if successful.
+     * @return the ConnectivityInformation object if successful.
      */
-    public ConnectivityInformationInner beginCheckConnectivity(String resourceGroupName, String networkWatcherName, ConnectivityParametersInner parameters) {
+    public ConnectivityInformation beginCheckConnectivity(String resourceGroupName, String networkWatcherName, ConnectivityParameters parameters) {
         return beginCheckConnectivityWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).toBlocking().single().body();
     }
 
@@ -2019,7 +2025,7 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ConnectivityInformationInner> beginCheckConnectivityAsync(String resourceGroupName, String networkWatcherName, ConnectivityParametersInner parameters, final ServiceCallback<ConnectivityInformationInner> serviceCallback) {
+    public ServiceFuture<ConnectivityInformation> beginCheckConnectivityAsync(String resourceGroupName, String networkWatcherName, ConnectivityParameters parameters, final ServiceCallback<ConnectivityInformation> serviceCallback) {
         return ServiceFuture.fromResponse(beginCheckConnectivityWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters), serviceCallback);
     }
 
@@ -2030,12 +2036,12 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @param networkWatcherName The name of the network watcher resource.
      * @param parameters Parameters that determine how the connectivity check will be performed.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ConnectivityInformationInner object
+     * @return the observable to the ConnectivityInformation object
      */
-    public Observable<ConnectivityInformationInner> beginCheckConnectivityAsync(String resourceGroupName, String networkWatcherName, ConnectivityParametersInner parameters) {
-        return beginCheckConnectivityWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).map(new Func1<ServiceResponse<ConnectivityInformationInner>, ConnectivityInformationInner>() {
+    public Observable<ConnectivityInformation> beginCheckConnectivityAsync(String resourceGroupName, String networkWatcherName, ConnectivityParameters parameters) {
+        return beginCheckConnectivityWithServiceResponseAsync(resourceGroupName, networkWatcherName, parameters).map(new Func1<ServiceResponse<ConnectivityInformation>, ConnectivityInformation>() {
             @Override
-            public ConnectivityInformationInner call(ServiceResponse<ConnectivityInformationInner> response) {
+            public ConnectivityInformation call(ServiceResponse<ConnectivityInformation> response) {
                 return response.body();
             }
         });
@@ -2048,9 +2054,9 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
      * @param networkWatcherName The name of the network watcher resource.
      * @param parameters Parameters that determine how the connectivity check will be performed.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ConnectivityInformationInner object
+     * @return the observable to the ConnectivityInformation object
      */
-    public Observable<ServiceResponse<ConnectivityInformationInner>> beginCheckConnectivityWithServiceResponseAsync(String resourceGroupName, String networkWatcherName, ConnectivityParametersInner parameters) {
+    public Observable<ServiceResponse<ConnectivityInformation>> beginCheckConnectivityWithServiceResponseAsync(String resourceGroupName, String networkWatcherName, ConnectivityParameters parameters) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -2066,11 +2072,11 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
         Validator.validate(parameters);
         final String apiVersion = "2017-08-01";
         return service.beginCheckConnectivity(resourceGroupName, networkWatcherName, this.client.subscriptionId(), parameters, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ConnectivityInformationInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ConnectivityInformation>>>() {
                 @Override
-                public Observable<ServiceResponse<ConnectivityInformationInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<ConnectivityInformation>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<ConnectivityInformationInner> clientResponse = beginCheckConnectivityDelegate(response);
+                        ServiceResponse<ConnectivityInformation> clientResponse = beginCheckConnectivityDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -2079,10 +2085,10 @@ public class NetworkWatchersInner implements InnerSupportsGet<NetworkWatcherInne
             });
     }
 
-    private ServiceResponse<ConnectivityInformationInner> beginCheckConnectivityDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<ConnectivityInformationInner, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<ConnectivityInformationInner>() { }.getType())
-                .register(202, new TypeToken<ConnectivityInformationInner>() { }.getType())
+    private ServiceResponse<ConnectivityInformation> beginCheckConnectivityDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<ConnectivityInformation, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<ConnectivityInformation>() { }.getType())
+                .register(202, new TypeToken<ConnectivityInformation>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }

@@ -113,14 +113,14 @@ class SubnetImpl
     @Override
     public SubnetImpl withExistingNetworkSecurityGroup(String resourceId) {
         // Workaround for REST API's expectation of an object rather than string ID - should be fixed in Swagger specs or REST
-        SubResource reference = new SubResource().withId(resourceId);
+        NetworkSecurityGroupInner reference = new NetworkSecurityGroupInner().withId(resourceId);
         this.inner().withNetworkSecurityGroup(reference);
         return this;
     }
 
     @Override
     public SubnetImpl withExistingRouteTable(String resourceId) {
-        SubResource reference = new SubResource().withId(resourceId);
+        RouteTableInner reference = new RouteTableInner().withId(resourceId);
         this.inner().withRouteTable(reference);
         return this;
     }

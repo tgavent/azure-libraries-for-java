@@ -10,6 +10,8 @@ import com.microsoft.azure.management.network.Access;
 import com.microsoft.azure.management.network.Direction;
 import com.microsoft.azure.management.network.Protocol;
 import com.microsoft.azure.management.network.VerificationIPFlow;
+import com.microsoft.azure.management.network.VerificationIPFlowParameters;
+import com.microsoft.azure.management.network.VerificationIPFlowResult;
 import com.microsoft.azure.management.resources.fluentcore.model.implementation.ExecutableImpl;
 import rx.Observable;
 import rx.functions.Func1;
@@ -21,8 +23,8 @@ import rx.functions.Func1;
 public class VerificationIPFlowImpl extends ExecutableImpl<VerificationIPFlow>
         implements VerificationIPFlow, VerificationIPFlow.Definition {
     private final NetworkWatcherImpl parent;
-    private VerificationIPFlowParametersInner parameters = new VerificationIPFlowParametersInner();
-    private VerificationIPFlowResultInner result;
+    private VerificationIPFlowParameters parameters = new VerificationIPFlowParameters();
+    private VerificationIPFlowResult result;
 
     VerificationIPFlowImpl(NetworkWatcherImpl parent) {
         this.parent = parent;
@@ -115,9 +117,9 @@ public class VerificationIPFlowImpl extends ExecutableImpl<VerificationIPFlow>
     public Observable<VerificationIPFlow> executeWorkAsync() {
         return this.parent().manager().inner().networkWatchers()
                 .verifyIPFlowAsync(parent.resourceGroupName(), parent.name(), parameters)
-                .map(new Func1<VerificationIPFlowResultInner, VerificationIPFlow>() {
+                .map(new Func1<VerificationIPFlowResult, VerificationIPFlow>() {
                     @Override
-                    public VerificationIPFlow call(VerificationIPFlowResultInner verificationIPFlowResultInner) {
+                    public VerificationIPFlow call(VerificationIPFlowResult verificationIPFlowResultInner) {
                         VerificationIPFlowImpl.this.result = verificationIPFlowResultInner;
                         return VerificationIPFlowImpl.this;
                     }

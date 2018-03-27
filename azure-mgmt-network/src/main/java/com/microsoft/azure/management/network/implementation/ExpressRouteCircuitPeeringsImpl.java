@@ -64,7 +64,7 @@ class ExpressRouteCircuitPeeringsImpl extends IndependentChildrenImpl<
 
     @Override
     protected ExpressRouteCircuitPeeringImpl wrapModel(String name) {
-        return new ExpressRouteCircuitPeeringImpl(parent, new ExpressRouteCircuitPeeringInner(), inner(), new ExpressRouteCircuitPeeringType(name));
+        return new ExpressRouteCircuitPeeringImpl(parent, new ExpressRouteCircuitPeeringInner(), inner(), ExpressRouteCircuitPeeringType.fromString(name));
     }
 
     protected ExpressRouteCircuitPeeringImpl wrapModel(ExpressRouteCircuitPeeringInner inner) {

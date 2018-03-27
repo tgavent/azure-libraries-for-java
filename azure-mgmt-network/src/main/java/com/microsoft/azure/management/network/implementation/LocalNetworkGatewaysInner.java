@@ -255,8 +255,8 @@ public class LocalNetworkGatewaysInner implements InnerSupportsGet<LocalNetworkG
 
     private ServiceResponse<LocalNetworkGatewayInner> beginCreateOrUpdateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<LocalNetworkGatewayInner, CloudException>newInstance(this.client.serializerAdapter())
-                .register(201, new TypeToken<LocalNetworkGatewayInner>() { }.getType())
                 .register(200, new TypeToken<LocalNetworkGatewayInner>() { }.getType())
+                .register(201, new TypeToken<LocalNetworkGatewayInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -489,9 +489,9 @@ public class LocalNetworkGatewaysInner implements InnerSupportsGet<LocalNetworkG
 
     private ServiceResponse<Void> beginDeleteDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
-                .register(204, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
+                .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }

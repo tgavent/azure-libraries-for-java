@@ -5,18 +5,18 @@
  */
 package com.microsoft.azure.management.network.implementation;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.TreeMap;
-
 import com.microsoft.azure.management.apigeneration.LangDefinition;
-import com.microsoft.azure.management.network.ApplicationGatewayBackendHealth;
 import com.microsoft.azure.management.network.ApplicationGatewayBackendHealthHttpSettings;
+import com.microsoft.azure.management.network.ApplicationGatewayBackendHealthInterface;
 import com.microsoft.azure.management.network.ApplicationGatewayBackendHealthServer;
 import com.microsoft.azure.management.network.ApplicationGatewayBackendHttpConfiguration;
 import com.microsoft.azure.management.network.ApplicationGatewayBackendHttpConfigurationHealth;
 import com.microsoft.azure.management.network.ApplicationGatewayBackendServerHealth;
 import com.microsoft.azure.management.resources.fluentcore.arm.ResourceUtils;
+
+import java.util.Collections;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Implementation of application gateway backend HTTP configuration health information.
@@ -65,7 +65,7 @@ public class ApplicationGatewayBackendHttpConfigurationHealthImpl implements App
     }
 
     @Override
-    public ApplicationGatewayBackendHealth parent() {
+    public ApplicationGatewayBackendHealthInterface parent() {
         return this.backendHealth;
     }
 

@@ -67,7 +67,7 @@ public class UsagesInner {
     }
 
     /**
-     * Lists compute usages for a subscription.
+     * List network usages for a subscription.
      *
      * @param location The location where resource usage is queried.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -86,7 +86,7 @@ public class UsagesInner {
     }
 
     /**
-     * Lists compute usages for a subscription.
+     * List network usages for a subscription.
      *
      * @param location The location where resource usage is queried.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -106,7 +106,7 @@ public class UsagesInner {
     }
 
     /**
-     * Lists compute usages for a subscription.
+     * List network usages for a subscription.
      *
      * @param location The location where resource usage is queried.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -123,7 +123,7 @@ public class UsagesInner {
     }
 
     /**
-     * Lists compute usages for a subscription.
+     * List network usages for a subscription.
      *
      * @param location The location where resource usage is queried.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -144,7 +144,7 @@ public class UsagesInner {
     }
 
     /**
-     * Lists compute usages for a subscription.
+     * List network usages for a subscription.
      *
     ServiceResponse<PageImpl<UsageInner>> * @param location The location where resource usage is queried.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -180,7 +180,7 @@ public class UsagesInner {
     }
 
     /**
-     * Lists compute usages for a subscription.
+     * List network usages for a subscription.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -199,7 +199,7 @@ public class UsagesInner {
     }
 
     /**
-     * Lists compute usages for a subscription.
+     * List network usages for a subscription.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
@@ -220,7 +220,7 @@ public class UsagesInner {
     }
 
     /**
-     * Lists compute usages for a subscription.
+     * List network usages for a subscription.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -237,7 +237,7 @@ public class UsagesInner {
     }
 
     /**
-     * Lists compute usages for a subscription.
+     * List network usages for a subscription.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -258,7 +258,7 @@ public class UsagesInner {
     }
 
     /**
-     * Lists compute usages for a subscription.
+     * List network usages for a subscription.
      *
     ServiceResponse<PageImpl<UsageInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation

@@ -15,22 +15,22 @@ import com.microsoft.azure.management.resources.fluentcore.arm.models.HasParent;
 import com.microsoft.azure.management.resources.fluentcore.model.HasInner;
 
 /**
- * A client-side representation of the health information of an application gateway backend HTTP settings configuration.
+ * A client-side representation of the health information of an application gateway backend.
  */
 @Fluent
 @Beta(SinceVersion.V1_4_0)
-public interface ApplicationGatewayBackendHttpConfigurationHealth extends
-    HasInner<ApplicationGatewayBackendHealthHttpSettings>,
-    HasParent<ApplicationGatewayBackendHealthInterface>,
-    HasName {
+public interface ApplicationGatewayBackendHealthInterface extends
+        HasInner<ApplicationGatewayBackendHealthPool>,
+        HasName,
+        HasParent<ApplicationGateway> {
 
     /**
-     * @return the associated application gateway backend HTTP configuration settings this health information pertains to
+     * @return the application gateway backend address pool that is health information pertains to
      */
-    ApplicationGatewayBackendHttpConfiguration backendHttpConfiguration();
+    ApplicationGatewayBackend backend();
 
     /**
-     * @return information about the health of each backend server, indexed by the server's IP address
+     * @return the health information about each associated backend HTTP settings configuration, indexed by its name
      */
-    Map<String, ApplicationGatewayBackendServerHealth> serverHealths();
+    Map<String, ApplicationGatewayBackendHttpConfigurationHealth> httpConfigurationHealths();
 }

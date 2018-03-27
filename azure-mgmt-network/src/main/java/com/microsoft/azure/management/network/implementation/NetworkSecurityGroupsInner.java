@@ -246,8 +246,8 @@ public class NetworkSecurityGroupsInner implements InnerSupportsGet<NetworkSecur
 
     private ServiceResponse<Void> beginDeleteDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
-                .register(202, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<Void>() { }.getType())
+                .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -581,8 +581,8 @@ public class NetworkSecurityGroupsInner implements InnerSupportsGet<NetworkSecur
 
     private ServiceResponse<NetworkSecurityGroupInner> beginCreateOrUpdateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<NetworkSecurityGroupInner, CloudException>newInstance(this.client.serializerAdapter())
-                .register(201, new TypeToken<NetworkSecurityGroupInner>() { }.getType())
                 .register(200, new TypeToken<NetworkSecurityGroupInner>() { }.getType())
+                .register(201, new TypeToken<NetworkSecurityGroupInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }

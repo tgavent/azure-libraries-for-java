@@ -93,6 +93,12 @@ public class PublicIPAddressInner extends Resource {
     private List<String> zones;
 
     /**
+     * Resource ID.
+     */
+    @JsonProperty(value = "id")
+    private String id;
+
+    /**
      * Get the sku value.
      *
      * @return the sku value
@@ -298,6 +304,26 @@ public class PublicIPAddressInner extends Resource {
      */
     public PublicIPAddressInner withZones(List<String> zones) {
         this.zones = zones;
+        return this;
+    }
+
+    /**
+     * Get the id value.
+     *
+     * @return the id value
+     */
+    public String id() {
+        return this.id;
+    }
+
+    /**
+     * Set the id value.
+     *
+     * @param id the id value to set
+     * @return the PublicIPAddressInner object itself.
+     */
+    public PublicIPAddressInner withId(String id) {
+        this.id = id;
         return this;
     }
 

@@ -16,6 +16,9 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
+import com.microsoft.azure.management.network.ExpressRouteCircuitsArpTableListResult;
+import com.microsoft.azure.management.network.ExpressRouteCircuitsRoutesTableListResult;
+import com.microsoft.azure.management.network.ExpressRouteCircuitsRoutesTableSummaryListResult;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
 import com.microsoft.rest.ServiceCallback;
@@ -279,9 +282,9 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
 
     private ServiceResponse<Void> beginDeleteDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
-                .register(204, new TypeToken<Void>() { }.getType())
-                .register(202, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<Void>() { }.getType())
+                .register(202, new TypeToken<Void>() { }.getType())
+                .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -532,8 +535,8 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
 
     private ServiceResponse<ExpressRouteCircuitInner> beginCreateOrUpdateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<ExpressRouteCircuitInner, CloudException>newInstance(this.client.serializerAdapter())
-                .register(201, new TypeToken<ExpressRouteCircuitInner>() { }.getType())
                 .register(200, new TypeToken<ExpressRouteCircuitInner>() { }.getType())
+                .register(201, new TypeToken<ExpressRouteCircuitInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -548,9 +551,9 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the ExpressRouteCircuitsArpTableListResultInner object if successful.
+     * @return the ExpressRouteCircuitsArpTableListResult object if successful.
      */
-    public ExpressRouteCircuitsArpTableListResultInner listArpTable(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
+    public ExpressRouteCircuitsArpTableListResult listArpTable(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
         return listArpTableWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath).toBlocking().last().body();
     }
 
@@ -565,7 +568,7 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ExpressRouteCircuitsArpTableListResultInner> listArpTableAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath, final ServiceCallback<ExpressRouteCircuitsArpTableListResultInner> serviceCallback) {
+    public ServiceFuture<ExpressRouteCircuitsArpTableListResult> listArpTableAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath, final ServiceCallback<ExpressRouteCircuitsArpTableListResult> serviceCallback) {
         return ServiceFuture.fromResponse(listArpTableWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath), serviceCallback);
     }
 
@@ -579,10 +582,10 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ExpressRouteCircuitsArpTableListResultInner> listArpTableAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
-        return listArpTableWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath).map(new Func1<ServiceResponse<ExpressRouteCircuitsArpTableListResultInner>, ExpressRouteCircuitsArpTableListResultInner>() {
+    public Observable<ExpressRouteCircuitsArpTableListResult> listArpTableAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
+        return listArpTableWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath).map(new Func1<ServiceResponse<ExpressRouteCircuitsArpTableListResult>, ExpressRouteCircuitsArpTableListResult>() {
             @Override
-            public ExpressRouteCircuitsArpTableListResultInner call(ServiceResponse<ExpressRouteCircuitsArpTableListResultInner> response) {
+            public ExpressRouteCircuitsArpTableListResult call(ServiceResponse<ExpressRouteCircuitsArpTableListResult> response) {
                 return response.body();
             }
         });
@@ -598,7 +601,7 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<ExpressRouteCircuitsArpTableListResultInner>> listArpTableWithServiceResponseAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
+    public Observable<ServiceResponse<ExpressRouteCircuitsArpTableListResult>> listArpTableWithServiceResponseAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -616,7 +619,7 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
         }
         final String apiVersion = "2017-08-01";
         Observable<Response<ResponseBody>> observable = service.listArpTable(resourceGroupName, circuitName, peeringName, devicePath, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<ExpressRouteCircuitsArpTableListResultInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<ExpressRouteCircuitsArpTableListResult>() { }.getType());
     }
 
     /**
@@ -629,9 +632,9 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the ExpressRouteCircuitsArpTableListResultInner object if successful.
+     * @return the ExpressRouteCircuitsArpTableListResult object if successful.
      */
-    public ExpressRouteCircuitsArpTableListResultInner beginListArpTable(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
+    public ExpressRouteCircuitsArpTableListResult beginListArpTable(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
         return beginListArpTableWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath).toBlocking().single().body();
     }
 
@@ -646,7 +649,7 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ExpressRouteCircuitsArpTableListResultInner> beginListArpTableAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath, final ServiceCallback<ExpressRouteCircuitsArpTableListResultInner> serviceCallback) {
+    public ServiceFuture<ExpressRouteCircuitsArpTableListResult> beginListArpTableAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath, final ServiceCallback<ExpressRouteCircuitsArpTableListResult> serviceCallback) {
         return ServiceFuture.fromResponse(beginListArpTableWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath), serviceCallback);
     }
 
@@ -658,12 +661,12 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @param peeringName The name of the peering.
      * @param devicePath The path of the device.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ExpressRouteCircuitsArpTableListResultInner object
+     * @return the observable to the ExpressRouteCircuitsArpTableListResult object
      */
-    public Observable<ExpressRouteCircuitsArpTableListResultInner> beginListArpTableAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
-        return beginListArpTableWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath).map(new Func1<ServiceResponse<ExpressRouteCircuitsArpTableListResultInner>, ExpressRouteCircuitsArpTableListResultInner>() {
+    public Observable<ExpressRouteCircuitsArpTableListResult> beginListArpTableAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
+        return beginListArpTableWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath).map(new Func1<ServiceResponse<ExpressRouteCircuitsArpTableListResult>, ExpressRouteCircuitsArpTableListResult>() {
             @Override
-            public ExpressRouteCircuitsArpTableListResultInner call(ServiceResponse<ExpressRouteCircuitsArpTableListResultInner> response) {
+            public ExpressRouteCircuitsArpTableListResult call(ServiceResponse<ExpressRouteCircuitsArpTableListResult> response) {
                 return response.body();
             }
         });
@@ -677,9 +680,9 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @param peeringName The name of the peering.
      * @param devicePath The path of the device.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ExpressRouteCircuitsArpTableListResultInner object
+     * @return the observable to the ExpressRouteCircuitsArpTableListResult object
      */
-    public Observable<ServiceResponse<ExpressRouteCircuitsArpTableListResultInner>> beginListArpTableWithServiceResponseAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
+    public Observable<ServiceResponse<ExpressRouteCircuitsArpTableListResult>> beginListArpTableWithServiceResponseAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -697,11 +700,11 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
         }
         final String apiVersion = "2017-08-01";
         return service.beginListArpTable(resourceGroupName, circuitName, peeringName, devicePath, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ExpressRouteCircuitsArpTableListResultInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ExpressRouteCircuitsArpTableListResult>>>() {
                 @Override
-                public Observable<ServiceResponse<ExpressRouteCircuitsArpTableListResultInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<ExpressRouteCircuitsArpTableListResult>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<ExpressRouteCircuitsArpTableListResultInner> clientResponse = beginListArpTableDelegate(response);
+                        ServiceResponse<ExpressRouteCircuitsArpTableListResult> clientResponse = beginListArpTableDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -710,9 +713,9 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
             });
     }
 
-    private ServiceResponse<ExpressRouteCircuitsArpTableListResultInner> beginListArpTableDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<ExpressRouteCircuitsArpTableListResultInner, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<ExpressRouteCircuitsArpTableListResultInner>() { }.getType())
+    private ServiceResponse<ExpressRouteCircuitsArpTableListResult> beginListArpTableDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<ExpressRouteCircuitsArpTableListResult, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<ExpressRouteCircuitsArpTableListResult>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -728,9 +731,9 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the ExpressRouteCircuitsRoutesTableListResultInner object if successful.
+     * @return the ExpressRouteCircuitsRoutesTableListResult object if successful.
      */
-    public ExpressRouteCircuitsRoutesTableListResultInner listRoutesTable(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
+    public ExpressRouteCircuitsRoutesTableListResult listRoutesTable(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
         return listRoutesTableWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath).toBlocking().last().body();
     }
 
@@ -745,7 +748,7 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ExpressRouteCircuitsRoutesTableListResultInner> listRoutesTableAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath, final ServiceCallback<ExpressRouteCircuitsRoutesTableListResultInner> serviceCallback) {
+    public ServiceFuture<ExpressRouteCircuitsRoutesTableListResult> listRoutesTableAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath, final ServiceCallback<ExpressRouteCircuitsRoutesTableListResult> serviceCallback) {
         return ServiceFuture.fromResponse(listRoutesTableWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath), serviceCallback);
     }
 
@@ -759,10 +762,10 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ExpressRouteCircuitsRoutesTableListResultInner> listRoutesTableAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
-        return listRoutesTableWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath).map(new Func1<ServiceResponse<ExpressRouteCircuitsRoutesTableListResultInner>, ExpressRouteCircuitsRoutesTableListResultInner>() {
+    public Observable<ExpressRouteCircuitsRoutesTableListResult> listRoutesTableAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
+        return listRoutesTableWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath).map(new Func1<ServiceResponse<ExpressRouteCircuitsRoutesTableListResult>, ExpressRouteCircuitsRoutesTableListResult>() {
             @Override
-            public ExpressRouteCircuitsRoutesTableListResultInner call(ServiceResponse<ExpressRouteCircuitsRoutesTableListResultInner> response) {
+            public ExpressRouteCircuitsRoutesTableListResult call(ServiceResponse<ExpressRouteCircuitsRoutesTableListResult> response) {
                 return response.body();
             }
         });
@@ -778,7 +781,7 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<ExpressRouteCircuitsRoutesTableListResultInner>> listRoutesTableWithServiceResponseAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
+    public Observable<ServiceResponse<ExpressRouteCircuitsRoutesTableListResult>> listRoutesTableWithServiceResponseAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -796,7 +799,7 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
         }
         final String apiVersion = "2017-08-01";
         Observable<Response<ResponseBody>> observable = service.listRoutesTable(resourceGroupName, circuitName, peeringName, devicePath, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<ExpressRouteCircuitsRoutesTableListResultInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<ExpressRouteCircuitsRoutesTableListResult>() { }.getType());
     }
 
     /**
@@ -809,9 +812,9 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the ExpressRouteCircuitsRoutesTableListResultInner object if successful.
+     * @return the ExpressRouteCircuitsRoutesTableListResult object if successful.
      */
-    public ExpressRouteCircuitsRoutesTableListResultInner beginListRoutesTable(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
+    public ExpressRouteCircuitsRoutesTableListResult beginListRoutesTable(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
         return beginListRoutesTableWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath).toBlocking().single().body();
     }
 
@@ -826,7 +829,7 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ExpressRouteCircuitsRoutesTableListResultInner> beginListRoutesTableAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath, final ServiceCallback<ExpressRouteCircuitsRoutesTableListResultInner> serviceCallback) {
+    public ServiceFuture<ExpressRouteCircuitsRoutesTableListResult> beginListRoutesTableAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath, final ServiceCallback<ExpressRouteCircuitsRoutesTableListResult> serviceCallback) {
         return ServiceFuture.fromResponse(beginListRoutesTableWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath), serviceCallback);
     }
 
@@ -838,12 +841,12 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @param peeringName The name of the peering.
      * @param devicePath The path of the device.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ExpressRouteCircuitsRoutesTableListResultInner object
+     * @return the observable to the ExpressRouteCircuitsRoutesTableListResult object
      */
-    public Observable<ExpressRouteCircuitsRoutesTableListResultInner> beginListRoutesTableAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
-        return beginListRoutesTableWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath).map(new Func1<ServiceResponse<ExpressRouteCircuitsRoutesTableListResultInner>, ExpressRouteCircuitsRoutesTableListResultInner>() {
+    public Observable<ExpressRouteCircuitsRoutesTableListResult> beginListRoutesTableAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
+        return beginListRoutesTableWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath).map(new Func1<ServiceResponse<ExpressRouteCircuitsRoutesTableListResult>, ExpressRouteCircuitsRoutesTableListResult>() {
             @Override
-            public ExpressRouteCircuitsRoutesTableListResultInner call(ServiceResponse<ExpressRouteCircuitsRoutesTableListResultInner> response) {
+            public ExpressRouteCircuitsRoutesTableListResult call(ServiceResponse<ExpressRouteCircuitsRoutesTableListResult> response) {
                 return response.body();
             }
         });
@@ -857,9 +860,9 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @param peeringName The name of the peering.
      * @param devicePath The path of the device.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ExpressRouteCircuitsRoutesTableListResultInner object
+     * @return the observable to the ExpressRouteCircuitsRoutesTableListResult object
      */
-    public Observable<ServiceResponse<ExpressRouteCircuitsRoutesTableListResultInner>> beginListRoutesTableWithServiceResponseAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
+    public Observable<ServiceResponse<ExpressRouteCircuitsRoutesTableListResult>> beginListRoutesTableWithServiceResponseAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -877,11 +880,11 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
         }
         final String apiVersion = "2017-08-01";
         return service.beginListRoutesTable(resourceGroupName, circuitName, peeringName, devicePath, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ExpressRouteCircuitsRoutesTableListResultInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ExpressRouteCircuitsRoutesTableListResult>>>() {
                 @Override
-                public Observable<ServiceResponse<ExpressRouteCircuitsRoutesTableListResultInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<ExpressRouteCircuitsRoutesTableListResult>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<ExpressRouteCircuitsRoutesTableListResultInner> clientResponse = beginListRoutesTableDelegate(response);
+                        ServiceResponse<ExpressRouteCircuitsRoutesTableListResult> clientResponse = beginListRoutesTableDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -890,9 +893,9 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
             });
     }
 
-    private ServiceResponse<ExpressRouteCircuitsRoutesTableListResultInner> beginListRoutesTableDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<ExpressRouteCircuitsRoutesTableListResultInner, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<ExpressRouteCircuitsRoutesTableListResultInner>() { }.getType())
+    private ServiceResponse<ExpressRouteCircuitsRoutesTableListResult> beginListRoutesTableDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<ExpressRouteCircuitsRoutesTableListResult, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<ExpressRouteCircuitsRoutesTableListResult>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -908,9 +911,9 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the ExpressRouteCircuitsRoutesTableSummaryListResultInner object if successful.
+     * @return the ExpressRouteCircuitsRoutesTableSummaryListResult object if successful.
      */
-    public ExpressRouteCircuitsRoutesTableSummaryListResultInner listRoutesTableSummary(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
+    public ExpressRouteCircuitsRoutesTableSummaryListResult listRoutesTableSummary(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
         return listRoutesTableSummaryWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath).toBlocking().last().body();
     }
 
@@ -925,7 +928,7 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ExpressRouteCircuitsRoutesTableSummaryListResultInner> listRoutesTableSummaryAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath, final ServiceCallback<ExpressRouteCircuitsRoutesTableSummaryListResultInner> serviceCallback) {
+    public ServiceFuture<ExpressRouteCircuitsRoutesTableSummaryListResult> listRoutesTableSummaryAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath, final ServiceCallback<ExpressRouteCircuitsRoutesTableSummaryListResult> serviceCallback) {
         return ServiceFuture.fromResponse(listRoutesTableSummaryWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath), serviceCallback);
     }
 
@@ -939,10 +942,10 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ExpressRouteCircuitsRoutesTableSummaryListResultInner> listRoutesTableSummaryAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
-        return listRoutesTableSummaryWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath).map(new Func1<ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResultInner>, ExpressRouteCircuitsRoutesTableSummaryListResultInner>() {
+    public Observable<ExpressRouteCircuitsRoutesTableSummaryListResult> listRoutesTableSummaryAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
+        return listRoutesTableSummaryWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath).map(new Func1<ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResult>, ExpressRouteCircuitsRoutesTableSummaryListResult>() {
             @Override
-            public ExpressRouteCircuitsRoutesTableSummaryListResultInner call(ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResultInner> response) {
+            public ExpressRouteCircuitsRoutesTableSummaryListResult call(ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResult> response) {
                 return response.body();
             }
         });
@@ -958,7 +961,7 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResultInner>> listRoutesTableSummaryWithServiceResponseAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
+    public Observable<ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResult>> listRoutesTableSummaryWithServiceResponseAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -976,7 +979,7 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
         }
         final String apiVersion = "2017-08-01";
         Observable<Response<ResponseBody>> observable = service.listRoutesTableSummary(resourceGroupName, circuitName, peeringName, devicePath, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<ExpressRouteCircuitsRoutesTableSummaryListResultInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<ExpressRouteCircuitsRoutesTableSummaryListResult>() { }.getType());
     }
 
     /**
@@ -989,9 +992,9 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the ExpressRouteCircuitsRoutesTableSummaryListResultInner object if successful.
+     * @return the ExpressRouteCircuitsRoutesTableSummaryListResult object if successful.
      */
-    public ExpressRouteCircuitsRoutesTableSummaryListResultInner beginListRoutesTableSummary(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
+    public ExpressRouteCircuitsRoutesTableSummaryListResult beginListRoutesTableSummary(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
         return beginListRoutesTableSummaryWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath).toBlocking().single().body();
     }
 
@@ -1006,7 +1009,7 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ExpressRouteCircuitsRoutesTableSummaryListResultInner> beginListRoutesTableSummaryAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath, final ServiceCallback<ExpressRouteCircuitsRoutesTableSummaryListResultInner> serviceCallback) {
+    public ServiceFuture<ExpressRouteCircuitsRoutesTableSummaryListResult> beginListRoutesTableSummaryAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath, final ServiceCallback<ExpressRouteCircuitsRoutesTableSummaryListResult> serviceCallback) {
         return ServiceFuture.fromResponse(beginListRoutesTableSummaryWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath), serviceCallback);
     }
 
@@ -1018,12 +1021,12 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @param peeringName The name of the peering.
      * @param devicePath The path of the device.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ExpressRouteCircuitsRoutesTableSummaryListResultInner object
+     * @return the observable to the ExpressRouteCircuitsRoutesTableSummaryListResult object
      */
-    public Observable<ExpressRouteCircuitsRoutesTableSummaryListResultInner> beginListRoutesTableSummaryAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
-        return beginListRoutesTableSummaryWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath).map(new Func1<ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResultInner>, ExpressRouteCircuitsRoutesTableSummaryListResultInner>() {
+    public Observable<ExpressRouteCircuitsRoutesTableSummaryListResult> beginListRoutesTableSummaryAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
+        return beginListRoutesTableSummaryWithServiceResponseAsync(resourceGroupName, circuitName, peeringName, devicePath).map(new Func1<ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResult>, ExpressRouteCircuitsRoutesTableSummaryListResult>() {
             @Override
-            public ExpressRouteCircuitsRoutesTableSummaryListResultInner call(ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResultInner> response) {
+            public ExpressRouteCircuitsRoutesTableSummaryListResult call(ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResult> response) {
                 return response.body();
             }
         });
@@ -1037,9 +1040,9 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
      * @param peeringName The name of the peering.
      * @param devicePath The path of the device.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ExpressRouteCircuitsRoutesTableSummaryListResultInner object
+     * @return the observable to the ExpressRouteCircuitsRoutesTableSummaryListResult object
      */
-    public Observable<ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResultInner>> beginListRoutesTableSummaryWithServiceResponseAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
+    public Observable<ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResult>> beginListRoutesTableSummaryWithServiceResponseAsync(String resourceGroupName, String circuitName, String peeringName, String devicePath) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1057,11 +1060,11 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
         }
         final String apiVersion = "2017-08-01";
         return service.beginListRoutesTableSummary(resourceGroupName, circuitName, peeringName, devicePath, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResultInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResult>>>() {
                 @Override
-                public Observable<ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResultInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResult>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResultInner> clientResponse = beginListRoutesTableSummaryDelegate(response);
+                        ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResult> clientResponse = beginListRoutesTableSummaryDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -1070,9 +1073,9 @@ public class ExpressRouteCircuitsInner implements InnerSupportsGet<ExpressRouteC
             });
     }
 
-    private ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResultInner> beginListRoutesTableSummaryDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<ExpressRouteCircuitsRoutesTableSummaryListResultInner, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<ExpressRouteCircuitsRoutesTableSummaryListResultInner>() { }.getType())
+    private ServiceResponse<ExpressRouteCircuitsRoutesTableSummaryListResult> beginListRoutesTableSummaryDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<ExpressRouteCircuitsRoutesTableSummaryListResult, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<ExpressRouteCircuitsRoutesTableSummaryListResult>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);

@@ -45,6 +45,12 @@ public class RouteTableInner extends Resource {
     private String etag;
 
     /**
+     * Resource ID.
+     */
+    @JsonProperty(value = "id")
+    private String id;
+
+    /**
      * Get the routes value.
      *
      * @return the routes value
@@ -110,6 +116,26 @@ public class RouteTableInner extends Resource {
      */
     public RouteTableInner withEtag(String etag) {
         this.etag = etag;
+        return this;
+    }
+
+    /**
+     * Get the id value.
+     *
+     * @return the id value
+     */
+    public String id() {
+        return this.id;
+    }
+
+    /**
+     * Set the id value.
+     *
+     * @param id the id value to set
+     * @return the RouteTableInner object itself.
+     */
+    public RouteTableInner withId(String id) {
+        this.id = id;
         return this;
     }
 

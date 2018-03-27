@@ -55,7 +55,7 @@ public class LoadBalancingRuleInner extends SubResource {
     private LoadDistribution loadDistribution;
 
     /**
-     * The port for the external endpoint. Port numbers for each Rule must be
+     * The port for the external endpoint. Port numbers for each rule must be
      * unique within the Load Balancer. Acceptable values are between 1 and
      * 65534.
      */

@@ -139,6 +139,12 @@ public class ApplicationGatewayInner extends Resource {
     private String etag;
 
     /**
+     * Resource ID.
+     */
+    @JsonProperty(value = "id")
+    private String id;
+
+    /**
      * A list of availability zones denoting where the resource needs to come from..
      */
     @JsonProperty(value = "zones")
@@ -510,6 +516,26 @@ public class ApplicationGatewayInner extends Resource {
      */
     public ApplicationGatewayInner withEtag(String etag) {
         this.etag = etag;
+        return this;
+    }
+
+    /**
+     * Get the id value.
+     *
+     * @return the id value
+     */
+    public String id() {
+        return this.id;
+    }
+
+    /**
+     * Set the id value.
+     *
+     * @param id the id value to set
+     * @return the ApplicationGatewayInner object itself.
+     */
+    public ApplicationGatewayInner withId(String id) {
+        this.id = id;
         return this;
     }
 

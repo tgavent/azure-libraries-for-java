@@ -266,9 +266,9 @@ public class PublicIPAddressesInner implements InnerSupportsGet<PublicIPAddressI
 
     private ServiceResponse<Void> beginDeleteDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
-                .register(204, new TypeToken<Void>() { }.getType())
-                .register(202, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<Void>() { }.getType())
+                .register(202, new TypeToken<Void>() { }.getType())
+                .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -601,8 +601,8 @@ public class PublicIPAddressesInner implements InnerSupportsGet<PublicIPAddressI
 
     private ServiceResponse<PublicIPAddressInner> beginCreateOrUpdateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<PublicIPAddressInner, CloudException>newInstance(this.client.serializerAdapter())
-                .register(201, new TypeToken<PublicIPAddressInner>() { }.getType())
                 .register(200, new TypeToken<PublicIPAddressInner>() { }.getType())
+                .register(201, new TypeToken<PublicIPAddressInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }

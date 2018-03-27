@@ -67,7 +67,7 @@ public class NetworkInterfaceLoadBalancersInner {
     }
 
     /**
-     * Get all load balancers in a network interface.
+     * List all load balancers in a network interface.
      *
      * @param resourceGroupName The name of the resource group.
      * @param networkInterfaceName The name of the network interface.
@@ -87,7 +87,7 @@ public class NetworkInterfaceLoadBalancersInner {
     }
 
     /**
-     * Get all load balancers in a network interface.
+     * List all load balancers in a network interface.
      *
      * @param resourceGroupName The name of the resource group.
      * @param networkInterfaceName The name of the network interface.
@@ -108,7 +108,7 @@ public class NetworkInterfaceLoadBalancersInner {
     }
 
     /**
-     * Get all load balancers in a network interface.
+     * List all load balancers in a network interface.
      *
      * @param resourceGroupName The name of the resource group.
      * @param networkInterfaceName The name of the network interface.
@@ -126,7 +126,7 @@ public class NetworkInterfaceLoadBalancersInner {
     }
 
     /**
-     * Get all load balancers in a network interface.
+     * List all load balancers in a network interface.
      *
      * @param resourceGroupName The name of the resource group.
      * @param networkInterfaceName The name of the network interface.
@@ -148,7 +148,7 @@ public class NetworkInterfaceLoadBalancersInner {
     }
 
     /**
-     * Get all load balancers in a network interface.
+     * List all load balancers in a network interface.
      *
     ServiceResponse<PageImpl<LoadBalancerInner>> * @param resourceGroupName The name of the resource group.
     ServiceResponse<PageImpl<LoadBalancerInner>> * @param networkInterfaceName The name of the network interface.
@@ -188,7 +188,7 @@ public class NetworkInterfaceLoadBalancersInner {
     }
 
     /**
-     * Get all load balancers in a network interface.
+     * List all load balancers in a network interface.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -207,7 +207,7 @@ public class NetworkInterfaceLoadBalancersInner {
     }
 
     /**
-     * Get all load balancers in a network interface.
+     * List all load balancers in a network interface.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
@@ -228,7 +228,7 @@ public class NetworkInterfaceLoadBalancersInner {
     }
 
     /**
-     * Get all load balancers in a network interface.
+     * List all load balancers in a network interface.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -245,7 +245,7 @@ public class NetworkInterfaceLoadBalancersInner {
     }
 
     /**
-     * Get all load balancers in a network interface.
+     * List all load balancers in a network interface.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -266,7 +266,7 @@ public class NetworkInterfaceLoadBalancersInner {
     }
 
     /**
-     * Get all load balancers in a network interface.
+     * List all load balancers in a network interface.
      *
     ServiceResponse<PageImpl<LoadBalancerInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
