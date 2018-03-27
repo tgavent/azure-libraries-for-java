@@ -12,7 +12,6 @@ import java.util.TreeMap;
 import com.microsoft.azure.management.apigeneration.LangDefinition;
 import com.microsoft.azure.management.network.ApplicationGateway;
 import com.microsoft.azure.management.network.ApplicationGatewayBackend;
-import com.microsoft.azure.management.network.ApplicationGatewayBackendHealth;
 import com.microsoft.azure.management.network.ApplicationGatewayBackendHealthHttpSettings;
 import com.microsoft.azure.management.network.ApplicationGatewayBackendHealthInterface;
 import com.microsoft.azure.management.network.ApplicationGatewayBackendHealthPool;

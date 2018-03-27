@@ -15,7 +15,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
-import com.microsoft.azure.management.network.ConnectionResetSharedKey;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
 import com.microsoft.rest.ServiceCallback;
@@ -103,11 +102,11 @@ public class VirtualNetworkGatewayConnectionsInner implements InnerSupportsGet<V
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.VirtualNetworkGatewayConnections resetSharedKey" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey/reset")
-        Observable<Response<ResponseBody>> resetSharedKey(@Path("resourceGroupName") String resourceGroupName, @Path("virtualNetworkGatewayConnectionName") String virtualNetworkGatewayConnectionName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body ConnectionResetSharedKey parameters, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> resetSharedKey(@Path("resourceGroupName") String resourceGroupName, @Path("virtualNetworkGatewayConnectionName") String virtualNetworkGatewayConnectionName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body ConnectionResetSharedKeyInner parameters, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.VirtualNetworkGatewayConnections beginResetSharedKey" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey/reset")
-        Observable<Response<ResponseBody>> beginResetSharedKey(@Path("resourceGroupName") String resourceGroupName, @Path("virtualNetworkGatewayConnectionName") String virtualNetworkGatewayConnectionName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body ConnectionResetSharedKey parameters, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginResetSharedKey(@Path("resourceGroupName") String resourceGroupName, @Path("virtualNetworkGatewayConnectionName") String virtualNetworkGatewayConnectionName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body ConnectionResetSharedKeyInner parameters, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.VirtualNetworkGatewayConnections listByResourceGroupNext" })
         @GET
@@ -894,9 +893,9 @@ public class VirtualNetworkGatewayConnectionsInner implements InnerSupportsGet<V
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the ConnectionResetSharedKey object if successful.
+     * @return the ConnectionResetSharedKeyInner object if successful.
      */
-    public ConnectionResetSharedKey resetSharedKey(String resourceGroupName, String virtualNetworkGatewayConnectionName, int keyLength) {
+    public ConnectionResetSharedKeyInner resetSharedKey(String resourceGroupName, String virtualNetworkGatewayConnectionName, int keyLength) {
         return resetSharedKeyWithServiceResponseAsync(resourceGroupName, virtualNetworkGatewayConnectionName, keyLength).toBlocking().last().body();
     }
 
@@ -910,7 +909,7 @@ public class VirtualNetworkGatewayConnectionsInner implements InnerSupportsGet<V
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ConnectionResetSharedKey> resetSharedKeyAsync(String resourceGroupName, String virtualNetworkGatewayConnectionName, int keyLength, final ServiceCallback<ConnectionResetSharedKey> serviceCallback) {
+    public ServiceFuture<ConnectionResetSharedKeyInner> resetSharedKeyAsync(String resourceGroupName, String virtualNetworkGatewayConnectionName, int keyLength, final ServiceCallback<ConnectionResetSharedKeyInner> serviceCallback) {
         return ServiceFuture.fromResponse(resetSharedKeyWithServiceResponseAsync(resourceGroupName, virtualNetworkGatewayConnectionName, keyLength), serviceCallback);
     }
 
@@ -923,10 +922,10 @@ public class VirtualNetworkGatewayConnectionsInner implements InnerSupportsGet<V
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ConnectionResetSharedKey> resetSharedKeyAsync(String resourceGroupName, String virtualNetworkGatewayConnectionName, int keyLength) {
-        return resetSharedKeyWithServiceResponseAsync(resourceGroupName, virtualNetworkGatewayConnectionName, keyLength).map(new Func1<ServiceResponse<ConnectionResetSharedKey>, ConnectionResetSharedKey>() {
+    public Observable<ConnectionResetSharedKeyInner> resetSharedKeyAsync(String resourceGroupName, String virtualNetworkGatewayConnectionName, int keyLength) {
+        return resetSharedKeyWithServiceResponseAsync(resourceGroupName, virtualNetworkGatewayConnectionName, keyLength).map(new Func1<ServiceResponse<ConnectionResetSharedKeyInner>, ConnectionResetSharedKeyInner>() {
             @Override
-            public ConnectionResetSharedKey call(ServiceResponse<ConnectionResetSharedKey> response) {
+            public ConnectionResetSharedKeyInner call(ServiceResponse<ConnectionResetSharedKeyInner> response) {
                 return response.body();
             }
         });
@@ -941,7 +940,7 @@ public class VirtualNetworkGatewayConnectionsInner implements InnerSupportsGet<V
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<ConnectionResetSharedKey>> resetSharedKeyWithServiceResponseAsync(String resourceGroupName, String virtualNetworkGatewayConnectionName, int keyLength) {
+    public Observable<ServiceResponse<ConnectionResetSharedKeyInner>> resetSharedKeyWithServiceResponseAsync(String resourceGroupName, String virtualNetworkGatewayConnectionName, int keyLength) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -952,10 +951,10 @@ public class VirtualNetworkGatewayConnectionsInner implements InnerSupportsGet<V
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         final String apiVersion = "2017-08-01";
-        ConnectionResetSharedKey parameters = new ConnectionResetSharedKey();
+        ConnectionResetSharedKeyInner parameters = new ConnectionResetSharedKeyInner();
         parameters.withKeyLength(keyLength);
         Observable<Response<ResponseBody>> observable = service.resetSharedKey(resourceGroupName, virtualNetworkGatewayConnectionName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), parameters, this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<ConnectionResetSharedKey>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<ConnectionResetSharedKeyInner>() { }.getType());
     }
 
     /**
@@ -967,9 +966,9 @@ public class VirtualNetworkGatewayConnectionsInner implements InnerSupportsGet<V
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the ConnectionResetSharedKey object if successful.
+     * @return the ConnectionResetSharedKeyInner object if successful.
      */
-    public ConnectionResetSharedKey beginResetSharedKey(String resourceGroupName, String virtualNetworkGatewayConnectionName, int keyLength) {
+    public ConnectionResetSharedKeyInner beginResetSharedKey(String resourceGroupName, String virtualNetworkGatewayConnectionName, int keyLength) {
         return beginResetSharedKeyWithServiceResponseAsync(resourceGroupName, virtualNetworkGatewayConnectionName, keyLength).toBlocking().single().body();
     }
 
@@ -983,7 +982,7 @@ public class VirtualNetworkGatewayConnectionsInner implements InnerSupportsGet<V
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ConnectionResetSharedKey> beginResetSharedKeyAsync(String resourceGroupName, String virtualNetworkGatewayConnectionName, int keyLength, final ServiceCallback<ConnectionResetSharedKey> serviceCallback) {
+    public ServiceFuture<ConnectionResetSharedKeyInner> beginResetSharedKeyAsync(String resourceGroupName, String virtualNetworkGatewayConnectionName, int keyLength, final ServiceCallback<ConnectionResetSharedKeyInner> serviceCallback) {
         return ServiceFuture.fromResponse(beginResetSharedKeyWithServiceResponseAsync(resourceGroupName, virtualNetworkGatewayConnectionName, keyLength), serviceCallback);
     }
 
@@ -994,12 +993,12 @@ public class VirtualNetworkGatewayConnectionsInner implements InnerSupportsGet<V
      * @param virtualNetworkGatewayConnectionName The virtual network gateway connection reset shared key Name.
      * @param keyLength The virtual network connection reset shared key length, should between 1 and 128.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ConnectionResetSharedKey object
+     * @return the observable to the ConnectionResetSharedKeyInner object
      */
-    public Observable<ConnectionResetSharedKey> beginResetSharedKeyAsync(String resourceGroupName, String virtualNetworkGatewayConnectionName, int keyLength) {
-        return beginResetSharedKeyWithServiceResponseAsync(resourceGroupName, virtualNetworkGatewayConnectionName, keyLength).map(new Func1<ServiceResponse<ConnectionResetSharedKey>, ConnectionResetSharedKey>() {
+    public Observable<ConnectionResetSharedKeyInner> beginResetSharedKeyAsync(String resourceGroupName, String virtualNetworkGatewayConnectionName, int keyLength) {
+        return beginResetSharedKeyWithServiceResponseAsync(resourceGroupName, virtualNetworkGatewayConnectionName, keyLength).map(new Func1<ServiceResponse<ConnectionResetSharedKeyInner>, ConnectionResetSharedKeyInner>() {
             @Override
-            public ConnectionResetSharedKey call(ServiceResponse<ConnectionResetSharedKey> response) {
+            public ConnectionResetSharedKeyInner call(ServiceResponse<ConnectionResetSharedKeyInner> response) {
                 return response.body();
             }
         });
@@ -1012,9 +1011,9 @@ public class VirtualNetworkGatewayConnectionsInner implements InnerSupportsGet<V
      * @param virtualNetworkGatewayConnectionName The virtual network gateway connection reset shared key Name.
      * @param keyLength The virtual network connection reset shared key length, should between 1 and 128.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ConnectionResetSharedKey object
+     * @return the observable to the ConnectionResetSharedKeyInner object
      */
-    public Observable<ServiceResponse<ConnectionResetSharedKey>> beginResetSharedKeyWithServiceResponseAsync(String resourceGroupName, String virtualNetworkGatewayConnectionName, int keyLength) {
+    public Observable<ServiceResponse<ConnectionResetSharedKeyInner>> beginResetSharedKeyWithServiceResponseAsync(String resourceGroupName, String virtualNetworkGatewayConnectionName, int keyLength) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1025,14 +1024,14 @@ public class VirtualNetworkGatewayConnectionsInner implements InnerSupportsGet<V
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         final String apiVersion = "2017-08-01";
-        ConnectionResetSharedKey parameters = new ConnectionResetSharedKey();
+        ConnectionResetSharedKeyInner parameters = new ConnectionResetSharedKeyInner();
         parameters.withKeyLength(keyLength);
         return service.beginResetSharedKey(resourceGroupName, virtualNetworkGatewayConnectionName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), parameters, this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ConnectionResetSharedKey>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ConnectionResetSharedKeyInner>>>() {
                 @Override
-                public Observable<ServiceResponse<ConnectionResetSharedKey>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<ConnectionResetSharedKeyInner>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<ConnectionResetSharedKey> clientResponse = beginResetSharedKeyDelegate(response);
+                        ServiceResponse<ConnectionResetSharedKeyInner> clientResponse = beginResetSharedKeyDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -1041,9 +1040,9 @@ public class VirtualNetworkGatewayConnectionsInner implements InnerSupportsGet<V
             });
     }
 
-    private ServiceResponse<ConnectionResetSharedKey> beginResetSharedKeyDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<ConnectionResetSharedKey, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<ConnectionResetSharedKey>() { }.getType())
+    private ServiceResponse<ConnectionResetSharedKeyInner> beginResetSharedKeyDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<ConnectionResetSharedKeyInner, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<ConnectionResetSharedKeyInner>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);

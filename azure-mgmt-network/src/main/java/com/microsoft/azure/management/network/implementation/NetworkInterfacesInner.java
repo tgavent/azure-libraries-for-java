@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
-import com.microsoft.azure.management.network.EffectiveNetworkSecurityGroupListResult;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
 import com.microsoft.rest.ServiceCallback;
@@ -1003,9 +1002,9 @@ public class NetworkInterfacesInner implements InnerSupportsGet<NetworkInterface
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the EffectiveNetworkSecurityGroupListResult object if successful.
+     * @return the EffectiveNetworkSecurityGroupListResultInner object if successful.
      */
-    public EffectiveNetworkSecurityGroupListResult listEffectiveNetworkSecurityGroups(String resourceGroupName, String networkInterfaceName) {
+    public EffectiveNetworkSecurityGroupListResultInner listEffectiveNetworkSecurityGroups(String resourceGroupName, String networkInterfaceName) {
         return listEffectiveNetworkSecurityGroupsWithServiceResponseAsync(resourceGroupName, networkInterfaceName).toBlocking().last().body();
     }
 
@@ -1018,7 +1017,7 @@ public class NetworkInterfacesInner implements InnerSupportsGet<NetworkInterface
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<EffectiveNetworkSecurityGroupListResult> listEffectiveNetworkSecurityGroupsAsync(String resourceGroupName, String networkInterfaceName, final ServiceCallback<EffectiveNetworkSecurityGroupListResult> serviceCallback) {
+    public ServiceFuture<EffectiveNetworkSecurityGroupListResultInner> listEffectiveNetworkSecurityGroupsAsync(String resourceGroupName, String networkInterfaceName, final ServiceCallback<EffectiveNetworkSecurityGroupListResultInner> serviceCallback) {
         return ServiceFuture.fromResponse(listEffectiveNetworkSecurityGroupsWithServiceResponseAsync(resourceGroupName, networkInterfaceName), serviceCallback);
     }
 
@@ -1030,10 +1029,10 @@ public class NetworkInterfacesInner implements InnerSupportsGet<NetworkInterface
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<EffectiveNetworkSecurityGroupListResult> listEffectiveNetworkSecurityGroupsAsync(String resourceGroupName, String networkInterfaceName) {
-        return listEffectiveNetworkSecurityGroupsWithServiceResponseAsync(resourceGroupName, networkInterfaceName).map(new Func1<ServiceResponse<EffectiveNetworkSecurityGroupListResult>, EffectiveNetworkSecurityGroupListResult>() {
+    public Observable<EffectiveNetworkSecurityGroupListResultInner> listEffectiveNetworkSecurityGroupsAsync(String resourceGroupName, String networkInterfaceName) {
+        return listEffectiveNetworkSecurityGroupsWithServiceResponseAsync(resourceGroupName, networkInterfaceName).map(new Func1<ServiceResponse<EffectiveNetworkSecurityGroupListResultInner>, EffectiveNetworkSecurityGroupListResultInner>() {
             @Override
-            public EffectiveNetworkSecurityGroupListResult call(ServiceResponse<EffectiveNetworkSecurityGroupListResult> response) {
+            public EffectiveNetworkSecurityGroupListResultInner call(ServiceResponse<EffectiveNetworkSecurityGroupListResultInner> response) {
                 return response.body();
             }
         });
@@ -1047,7 +1046,7 @@ public class NetworkInterfacesInner implements InnerSupportsGet<NetworkInterface
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<EffectiveNetworkSecurityGroupListResult>> listEffectiveNetworkSecurityGroupsWithServiceResponseAsync(String resourceGroupName, String networkInterfaceName) {
+    public Observable<ServiceResponse<EffectiveNetworkSecurityGroupListResultInner>> listEffectiveNetworkSecurityGroupsWithServiceResponseAsync(String resourceGroupName, String networkInterfaceName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1059,7 +1058,7 @@ public class NetworkInterfacesInner implements InnerSupportsGet<NetworkInterface
         }
         final String apiVersion = "2017-08-01";
         Observable<Response<ResponseBody>> observable = service.listEffectiveNetworkSecurityGroups(resourceGroupName, networkInterfaceName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<EffectiveNetworkSecurityGroupListResult>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<EffectiveNetworkSecurityGroupListResultInner>() { }.getType());
     }
 
     /**
@@ -1070,9 +1069,9 @@ public class NetworkInterfacesInner implements InnerSupportsGet<NetworkInterface
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the EffectiveNetworkSecurityGroupListResult object if successful.
+     * @return the EffectiveNetworkSecurityGroupListResultInner object if successful.
      */
-    public EffectiveNetworkSecurityGroupListResult beginListEffectiveNetworkSecurityGroups(String resourceGroupName, String networkInterfaceName) {
+    public EffectiveNetworkSecurityGroupListResultInner beginListEffectiveNetworkSecurityGroups(String resourceGroupName, String networkInterfaceName) {
         return beginListEffectiveNetworkSecurityGroupsWithServiceResponseAsync(resourceGroupName, networkInterfaceName).toBlocking().single().body();
     }
 
@@ -1085,7 +1084,7 @@ public class NetworkInterfacesInner implements InnerSupportsGet<NetworkInterface
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<EffectiveNetworkSecurityGroupListResult> beginListEffectiveNetworkSecurityGroupsAsync(String resourceGroupName, String networkInterfaceName, final ServiceCallback<EffectiveNetworkSecurityGroupListResult> serviceCallback) {
+    public ServiceFuture<EffectiveNetworkSecurityGroupListResultInner> beginListEffectiveNetworkSecurityGroupsAsync(String resourceGroupName, String networkInterfaceName, final ServiceCallback<EffectiveNetworkSecurityGroupListResultInner> serviceCallback) {
         return ServiceFuture.fromResponse(beginListEffectiveNetworkSecurityGroupsWithServiceResponseAsync(resourceGroupName, networkInterfaceName), serviceCallback);
     }
 
@@ -1095,12 +1094,12 @@ public class NetworkInterfacesInner implements InnerSupportsGet<NetworkInterface
      * @param resourceGroupName The name of the resource group.
      * @param networkInterfaceName The name of the network interface.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the EffectiveNetworkSecurityGroupListResult object
+     * @return the observable to the EffectiveNetworkSecurityGroupListResultInner object
      */
-    public Observable<EffectiveNetworkSecurityGroupListResult> beginListEffectiveNetworkSecurityGroupsAsync(String resourceGroupName, String networkInterfaceName) {
-        return beginListEffectiveNetworkSecurityGroupsWithServiceResponseAsync(resourceGroupName, networkInterfaceName).map(new Func1<ServiceResponse<EffectiveNetworkSecurityGroupListResult>, EffectiveNetworkSecurityGroupListResult>() {
+    public Observable<EffectiveNetworkSecurityGroupListResultInner> beginListEffectiveNetworkSecurityGroupsAsync(String resourceGroupName, String networkInterfaceName) {
+        return beginListEffectiveNetworkSecurityGroupsWithServiceResponseAsync(resourceGroupName, networkInterfaceName).map(new Func1<ServiceResponse<EffectiveNetworkSecurityGroupListResultInner>, EffectiveNetworkSecurityGroupListResultInner>() {
             @Override
-            public EffectiveNetworkSecurityGroupListResult call(ServiceResponse<EffectiveNetworkSecurityGroupListResult> response) {
+            public EffectiveNetworkSecurityGroupListResultInner call(ServiceResponse<EffectiveNetworkSecurityGroupListResultInner> response) {
                 return response.body();
             }
         });
@@ -1112,9 +1111,9 @@ public class NetworkInterfacesInner implements InnerSupportsGet<NetworkInterface
      * @param resourceGroupName The name of the resource group.
      * @param networkInterfaceName The name of the network interface.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the EffectiveNetworkSecurityGroupListResult object
+     * @return the observable to the EffectiveNetworkSecurityGroupListResultInner object
      */
-    public Observable<ServiceResponse<EffectiveNetworkSecurityGroupListResult>> beginListEffectiveNetworkSecurityGroupsWithServiceResponseAsync(String resourceGroupName, String networkInterfaceName) {
+    public Observable<ServiceResponse<EffectiveNetworkSecurityGroupListResultInner>> beginListEffectiveNetworkSecurityGroupsWithServiceResponseAsync(String resourceGroupName, String networkInterfaceName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1126,11 +1125,11 @@ public class NetworkInterfacesInner implements InnerSupportsGet<NetworkInterface
         }
         final String apiVersion = "2017-08-01";
         return service.beginListEffectiveNetworkSecurityGroups(resourceGroupName, networkInterfaceName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<EffectiveNetworkSecurityGroupListResult>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<EffectiveNetworkSecurityGroupListResultInner>>>() {
                 @Override
-                public Observable<ServiceResponse<EffectiveNetworkSecurityGroupListResult>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<EffectiveNetworkSecurityGroupListResultInner>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<EffectiveNetworkSecurityGroupListResult> clientResponse = beginListEffectiveNetworkSecurityGroupsDelegate(response);
+                        ServiceResponse<EffectiveNetworkSecurityGroupListResultInner> clientResponse = beginListEffectiveNetworkSecurityGroupsDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -1139,9 +1138,9 @@ public class NetworkInterfacesInner implements InnerSupportsGet<NetworkInterface
             });
     }
 
-    private ServiceResponse<EffectiveNetworkSecurityGroupListResult> beginListEffectiveNetworkSecurityGroupsDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<EffectiveNetworkSecurityGroupListResult, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<EffectiveNetworkSecurityGroupListResult>() { }.getType())
+    private ServiceResponse<EffectiveNetworkSecurityGroupListResultInner> beginListEffectiveNetworkSecurityGroupsDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<EffectiveNetworkSecurityGroupListResultInner, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<EffectiveNetworkSecurityGroupListResultInner>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);

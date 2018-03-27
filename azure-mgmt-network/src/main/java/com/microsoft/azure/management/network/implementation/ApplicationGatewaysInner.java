@@ -8,38 +8,36 @@
 
 package com.microsoft.azure.management.network.implementation;
 
+import com.microsoft.azure.management.resources.fluentcore.collection.InnerSupportsGet;
+import com.microsoft.azure.management.resources.fluentcore.collection.InnerSupportsDelete;
+import com.microsoft.azure.management.resources.fluentcore.collection.InnerSupportsListing;
+import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
-import com.microsoft.azure.management.network.ApplicationGatewayBackendHealth;
-import com.microsoft.azure.management.resources.fluentcore.collection.InnerSupportsDelete;
-import com.microsoft.azure.management.resources.fluentcore.collection.InnerSupportsGet;
-import com.microsoft.azure.management.resources.fluentcore.collection.InnerSupportsListing;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
-import okhttp3.ResponseBody;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.HTTP;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
-import retrofit2.http.Url;
-import rx.Observable;
-import rx.functions.Func1;
-
 import java.io.IOException;
 import java.util.List;
+import okhttp3.ResponseBody;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
+import retrofit2.http.HTTP;
+import retrofit2.http.Path;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Query;
+import retrofit2.http.Url;
+import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -1078,9 +1076,9 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the ApplicationGatewayBackendHealth object if successful.
+     * @return the ApplicationGatewayBackendHealthInner object if successful.
      */
-    public ApplicationGatewayBackendHealth backendHealth(String resourceGroupName, String applicationGatewayName) {
+    public ApplicationGatewayBackendHealthInner backendHealth(String resourceGroupName, String applicationGatewayName) {
         return backendHealthWithServiceResponseAsync(resourceGroupName, applicationGatewayName).toBlocking().last().body();
     }
 
@@ -1093,7 +1091,7 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ApplicationGatewayBackendHealth> backendHealthAsync(String resourceGroupName, String applicationGatewayName, final ServiceCallback<ApplicationGatewayBackendHealth> serviceCallback) {
+    public ServiceFuture<ApplicationGatewayBackendHealthInner> backendHealthAsync(String resourceGroupName, String applicationGatewayName, final ServiceCallback<ApplicationGatewayBackendHealthInner> serviceCallback) {
         return ServiceFuture.fromResponse(backendHealthWithServiceResponseAsync(resourceGroupName, applicationGatewayName), serviceCallback);
     }
 
@@ -1105,10 +1103,10 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ApplicationGatewayBackendHealth> backendHealthAsync(String resourceGroupName, String applicationGatewayName) {
-        return backendHealthWithServiceResponseAsync(resourceGroupName, applicationGatewayName).map(new Func1<ServiceResponse<ApplicationGatewayBackendHealth>, ApplicationGatewayBackendHealth>() {
+    public Observable<ApplicationGatewayBackendHealthInner> backendHealthAsync(String resourceGroupName, String applicationGatewayName) {
+        return backendHealthWithServiceResponseAsync(resourceGroupName, applicationGatewayName).map(new Func1<ServiceResponse<ApplicationGatewayBackendHealthInner>, ApplicationGatewayBackendHealthInner>() {
             @Override
-            public ApplicationGatewayBackendHealth call(ServiceResponse<ApplicationGatewayBackendHealth> response) {
+            public ApplicationGatewayBackendHealthInner call(ServiceResponse<ApplicationGatewayBackendHealthInner> response) {
                 return response.body();
             }
         });
@@ -1122,7 +1120,7 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<ApplicationGatewayBackendHealth>> backendHealthWithServiceResponseAsync(String resourceGroupName, String applicationGatewayName) {
+    public Observable<ServiceResponse<ApplicationGatewayBackendHealthInner>> backendHealthWithServiceResponseAsync(String resourceGroupName, String applicationGatewayName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1135,7 +1133,7 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
         final String apiVersion = "2017-08-01";
         final String expand = null;
         Observable<Response<ResponseBody>> observable = service.backendHealth(resourceGroupName, applicationGatewayName, this.client.subscriptionId(), apiVersion, expand, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<ApplicationGatewayBackendHealth>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<ApplicationGatewayBackendHealthInner>() { }.getType());
     }
     /**
      * Gets the backend health of the specified application gateway in a resource group.
@@ -1146,9 +1144,9 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the ApplicationGatewayBackendHealth object if successful.
+     * @return the ApplicationGatewayBackendHealthInner object if successful.
      */
-    public ApplicationGatewayBackendHealth backendHealth(String resourceGroupName, String applicationGatewayName, String expand) {
+    public ApplicationGatewayBackendHealthInner backendHealth(String resourceGroupName, String applicationGatewayName, String expand) {
         return backendHealthWithServiceResponseAsync(resourceGroupName, applicationGatewayName, expand).toBlocking().last().body();
     }
 
@@ -1162,7 +1160,7 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ApplicationGatewayBackendHealth> backendHealthAsync(String resourceGroupName, String applicationGatewayName, String expand, final ServiceCallback<ApplicationGatewayBackendHealth> serviceCallback) {
+    public ServiceFuture<ApplicationGatewayBackendHealthInner> backendHealthAsync(String resourceGroupName, String applicationGatewayName, String expand, final ServiceCallback<ApplicationGatewayBackendHealthInner> serviceCallback) {
         return ServiceFuture.fromResponse(backendHealthWithServiceResponseAsync(resourceGroupName, applicationGatewayName, expand), serviceCallback);
     }
 
@@ -1175,10 +1173,10 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ApplicationGatewayBackendHealth> backendHealthAsync(String resourceGroupName, String applicationGatewayName, String expand) {
-        return backendHealthWithServiceResponseAsync(resourceGroupName, applicationGatewayName, expand).map(new Func1<ServiceResponse<ApplicationGatewayBackendHealth>, ApplicationGatewayBackendHealth>() {
+    public Observable<ApplicationGatewayBackendHealthInner> backendHealthAsync(String resourceGroupName, String applicationGatewayName, String expand) {
+        return backendHealthWithServiceResponseAsync(resourceGroupName, applicationGatewayName, expand).map(new Func1<ServiceResponse<ApplicationGatewayBackendHealthInner>, ApplicationGatewayBackendHealthInner>() {
             @Override
-            public ApplicationGatewayBackendHealth call(ServiceResponse<ApplicationGatewayBackendHealth> response) {
+            public ApplicationGatewayBackendHealthInner call(ServiceResponse<ApplicationGatewayBackendHealthInner> response) {
                 return response.body();
             }
         });
@@ -1193,7 +1191,7 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<ApplicationGatewayBackendHealth>> backendHealthWithServiceResponseAsync(String resourceGroupName, String applicationGatewayName, String expand) {
+    public Observable<ServiceResponse<ApplicationGatewayBackendHealthInner>> backendHealthWithServiceResponseAsync(String resourceGroupName, String applicationGatewayName, String expand) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1205,7 +1203,7 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
         }
         final String apiVersion = "2017-08-01";
         Observable<Response<ResponseBody>> observable = service.backendHealth(resourceGroupName, applicationGatewayName, this.client.subscriptionId(), apiVersion, expand, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<ApplicationGatewayBackendHealth>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<ApplicationGatewayBackendHealthInner>() { }.getType());
     }
 
     /**
@@ -1216,9 +1214,9 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the ApplicationGatewayBackendHealth object if successful.
+     * @return the ApplicationGatewayBackendHealthInner object if successful.
      */
-    public ApplicationGatewayBackendHealth beginBackendHealth(String resourceGroupName, String applicationGatewayName) {
+    public ApplicationGatewayBackendHealthInner beginBackendHealth(String resourceGroupName, String applicationGatewayName) {
         return beginBackendHealthWithServiceResponseAsync(resourceGroupName, applicationGatewayName).toBlocking().single().body();
     }
 
@@ -1231,7 +1229,7 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ApplicationGatewayBackendHealth> beginBackendHealthAsync(String resourceGroupName, String applicationGatewayName, final ServiceCallback<ApplicationGatewayBackendHealth> serviceCallback) {
+    public ServiceFuture<ApplicationGatewayBackendHealthInner> beginBackendHealthAsync(String resourceGroupName, String applicationGatewayName, final ServiceCallback<ApplicationGatewayBackendHealthInner> serviceCallback) {
         return ServiceFuture.fromResponse(beginBackendHealthWithServiceResponseAsync(resourceGroupName, applicationGatewayName), serviceCallback);
     }
 
@@ -1241,12 +1239,12 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
      * @param resourceGroupName The name of the resource group.
      * @param applicationGatewayName The name of the application gateway.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ApplicationGatewayBackendHealth object
+     * @return the observable to the ApplicationGatewayBackendHealthInner object
      */
-    public Observable<ApplicationGatewayBackendHealth> beginBackendHealthAsync(String resourceGroupName, String applicationGatewayName) {
-        return beginBackendHealthWithServiceResponseAsync(resourceGroupName, applicationGatewayName).map(new Func1<ServiceResponse<ApplicationGatewayBackendHealth>, ApplicationGatewayBackendHealth>() {
+    public Observable<ApplicationGatewayBackendHealthInner> beginBackendHealthAsync(String resourceGroupName, String applicationGatewayName) {
+        return beginBackendHealthWithServiceResponseAsync(resourceGroupName, applicationGatewayName).map(new Func1<ServiceResponse<ApplicationGatewayBackendHealthInner>, ApplicationGatewayBackendHealthInner>() {
             @Override
-            public ApplicationGatewayBackendHealth call(ServiceResponse<ApplicationGatewayBackendHealth> response) {
+            public ApplicationGatewayBackendHealthInner call(ServiceResponse<ApplicationGatewayBackendHealthInner> response) {
                 return response.body();
             }
         });
@@ -1258,9 +1256,9 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
      * @param resourceGroupName The name of the resource group.
      * @param applicationGatewayName The name of the application gateway.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ApplicationGatewayBackendHealth object
+     * @return the observable to the ApplicationGatewayBackendHealthInner object
      */
-    public Observable<ServiceResponse<ApplicationGatewayBackendHealth>> beginBackendHealthWithServiceResponseAsync(String resourceGroupName, String applicationGatewayName) {
+    public Observable<ServiceResponse<ApplicationGatewayBackendHealthInner>> beginBackendHealthWithServiceResponseAsync(String resourceGroupName, String applicationGatewayName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1273,11 +1271,11 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
         final String apiVersion = "2017-08-01";
         final String expand = null;
         return service.beginBackendHealth(resourceGroupName, applicationGatewayName, this.client.subscriptionId(), apiVersion, expand, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ApplicationGatewayBackendHealth>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ApplicationGatewayBackendHealthInner>>>() {
                 @Override
-                public Observable<ServiceResponse<ApplicationGatewayBackendHealth>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<ApplicationGatewayBackendHealthInner>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<ApplicationGatewayBackendHealth> clientResponse = beginBackendHealthDelegate(response);
+                        ServiceResponse<ApplicationGatewayBackendHealthInner> clientResponse = beginBackendHealthDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -1295,9 +1293,9 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the ApplicationGatewayBackendHealth object if successful.
+     * @return the ApplicationGatewayBackendHealthInner object if successful.
      */
-    public ApplicationGatewayBackendHealth beginBackendHealth(String resourceGroupName, String applicationGatewayName, String expand) {
+    public ApplicationGatewayBackendHealthInner beginBackendHealth(String resourceGroupName, String applicationGatewayName, String expand) {
         return beginBackendHealthWithServiceResponseAsync(resourceGroupName, applicationGatewayName, expand).toBlocking().single().body();
     }
 
@@ -1311,7 +1309,7 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ApplicationGatewayBackendHealth> beginBackendHealthAsync(String resourceGroupName, String applicationGatewayName, String expand, final ServiceCallback<ApplicationGatewayBackendHealth> serviceCallback) {
+    public ServiceFuture<ApplicationGatewayBackendHealthInner> beginBackendHealthAsync(String resourceGroupName, String applicationGatewayName, String expand, final ServiceCallback<ApplicationGatewayBackendHealthInner> serviceCallback) {
         return ServiceFuture.fromResponse(beginBackendHealthWithServiceResponseAsync(resourceGroupName, applicationGatewayName, expand), serviceCallback);
     }
 
@@ -1322,12 +1320,12 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
      * @param applicationGatewayName The name of the application gateway.
      * @param expand Expands BackendAddressPool and BackendHttpSettings referenced in backend health.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ApplicationGatewayBackendHealth object
+     * @return the observable to the ApplicationGatewayBackendHealthInner object
      */
-    public Observable<ApplicationGatewayBackendHealth> beginBackendHealthAsync(String resourceGroupName, String applicationGatewayName, String expand) {
-        return beginBackendHealthWithServiceResponseAsync(resourceGroupName, applicationGatewayName, expand).map(new Func1<ServiceResponse<ApplicationGatewayBackendHealth>, ApplicationGatewayBackendHealth>() {
+    public Observable<ApplicationGatewayBackendHealthInner> beginBackendHealthAsync(String resourceGroupName, String applicationGatewayName, String expand) {
+        return beginBackendHealthWithServiceResponseAsync(resourceGroupName, applicationGatewayName, expand).map(new Func1<ServiceResponse<ApplicationGatewayBackendHealthInner>, ApplicationGatewayBackendHealthInner>() {
             @Override
-            public ApplicationGatewayBackendHealth call(ServiceResponse<ApplicationGatewayBackendHealth> response) {
+            public ApplicationGatewayBackendHealthInner call(ServiceResponse<ApplicationGatewayBackendHealthInner> response) {
                 return response.body();
             }
         });
@@ -1340,9 +1338,9 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
      * @param applicationGatewayName The name of the application gateway.
      * @param expand Expands BackendAddressPool and BackendHttpSettings referenced in backend health.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ApplicationGatewayBackendHealth object
+     * @return the observable to the ApplicationGatewayBackendHealthInner object
      */
-    public Observable<ServiceResponse<ApplicationGatewayBackendHealth>> beginBackendHealthWithServiceResponseAsync(String resourceGroupName, String applicationGatewayName, String expand) {
+    public Observable<ServiceResponse<ApplicationGatewayBackendHealthInner>> beginBackendHealthWithServiceResponseAsync(String resourceGroupName, String applicationGatewayName, String expand) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1354,11 +1352,11 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
         }
         final String apiVersion = "2017-08-01";
         return service.beginBackendHealth(resourceGroupName, applicationGatewayName, this.client.subscriptionId(), apiVersion, expand, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ApplicationGatewayBackendHealth>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ApplicationGatewayBackendHealthInner>>>() {
                 @Override
-                public Observable<ServiceResponse<ApplicationGatewayBackendHealth>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<ApplicationGatewayBackendHealthInner>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<ApplicationGatewayBackendHealth> clientResponse = beginBackendHealthDelegate(response);
+                        ServiceResponse<ApplicationGatewayBackendHealthInner> clientResponse = beginBackendHealthDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -1367,9 +1365,9 @@ public class ApplicationGatewaysInner implements InnerSupportsGet<ApplicationGat
             });
     }
 
-    private ServiceResponse<ApplicationGatewayBackendHealth> beginBackendHealthDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<ApplicationGatewayBackendHealth, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<ApplicationGatewayBackendHealth>() { }.getType())
+    private ServiceResponse<ApplicationGatewayBackendHealthInner> beginBackendHealthDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<ApplicationGatewayBackendHealthInner, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<ApplicationGatewayBackendHealthInner>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);

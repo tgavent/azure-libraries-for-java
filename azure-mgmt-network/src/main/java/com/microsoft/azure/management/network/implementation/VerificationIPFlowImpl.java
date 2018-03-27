@@ -11,7 +11,6 @@ import com.microsoft.azure.management.network.Direction;
 import com.microsoft.azure.management.network.Protocol;
 import com.microsoft.azure.management.network.VerificationIPFlow;
 import com.microsoft.azure.management.network.VerificationIPFlowParameters;
-import com.microsoft.azure.management.network.VerificationIPFlowResult;
 import com.microsoft.azure.management.resources.fluentcore.model.implementation.ExecutableImpl;
 import rx.Observable;
 import rx.functions.Func1;
@@ -24,7 +23,7 @@ public class VerificationIPFlowImpl extends ExecutableImpl<VerificationIPFlow>
         implements VerificationIPFlow, VerificationIPFlow.Definition {
     private final NetworkWatcherImpl parent;
     private VerificationIPFlowParameters parameters = new VerificationIPFlowParameters();
-    private VerificationIPFlowResult result;
+    private VerificationIPFlowResultInner result;
 
     VerificationIPFlowImpl(NetworkWatcherImpl parent) {
         this.parent = parent;
@@ -117,9 +116,9 @@ public class VerificationIPFlowImpl extends ExecutableImpl<VerificationIPFlow>
     public Observable<VerificationIPFlow> executeWorkAsync() {
         return this.parent().manager().inner().networkWatchers()
                 .verifyIPFlowAsync(parent.resourceGroupName(), parent.name(), parameters)
-                .map(new Func1<VerificationIPFlowResult, VerificationIPFlow>() {
+                .map(new Func1<VerificationIPFlowResultInner, VerificationIPFlow>() {
                     @Override
-                    public VerificationIPFlow call(VerificationIPFlowResult verificationIPFlowResultInner) {
+                    public VerificationIPFlow call(VerificationIPFlowResultInner verificationIPFlowResultInner) {
                         VerificationIPFlowImpl.this.result = verificationIPFlowResultInner;
                         return VerificationIPFlowImpl.this;
                     }

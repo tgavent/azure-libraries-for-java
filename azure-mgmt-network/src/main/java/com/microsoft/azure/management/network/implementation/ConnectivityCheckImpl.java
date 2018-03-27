@@ -10,7 +10,6 @@ import com.microsoft.azure.management.network.ConnectionStatus;
 import com.microsoft.azure.management.network.ConnectivityCheck;
 import com.microsoft.azure.management.network.ConnectivityDestination;
 import com.microsoft.azure.management.network.ConnectivityHop;
-import com.microsoft.azure.management.network.ConnectivityInformation;
 import com.microsoft.azure.management.network.ConnectivityParameters;
 import com.microsoft.azure.management.network.ConnectivitySource;
 import com.microsoft.azure.management.network.model.HasNetworkInterfaces;
@@ -30,7 +29,7 @@ public class ConnectivityCheckImpl extends ExecutableImpl<ConnectivityCheck>
 
     private final NetworkWatcherImpl parent;
     private ConnectivityParameters parameters = new ConnectivityParameters();
-    private ConnectivityInformation result;
+    private ConnectivityInformationInner result;
 
     ConnectivityCheckImpl(NetworkWatcherImpl parent) {
         this.parent = parent;
@@ -130,9 +129,9 @@ public class ConnectivityCheckImpl extends ExecutableImpl<ConnectivityCheck>
     public Observable<ConnectivityCheck> executeWorkAsync() {
         return this.parent().manager().inner().networkWatchers()
                 .checkConnectivityAsync(parent.resourceGroupName(), parent.name(), parameters)
-                .map(new Func1<ConnectivityInformation, ConnectivityCheck>() {
+                .map(new Func1<ConnectivityInformationInner, ConnectivityCheck>() {
                     @Override
-                    public ConnectivityCheck call(ConnectivityInformation connectivityInformation) {
+                    public ConnectivityCheck call(ConnectivityInformationInner connectivityInformation) {
                         ConnectivityCheckImpl.this.result = connectivityInformation;
                         return ConnectivityCheckImpl.this;
                     }
