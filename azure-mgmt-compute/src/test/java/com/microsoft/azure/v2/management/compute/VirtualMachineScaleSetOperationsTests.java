@@ -23,6 +23,7 @@ import com.microsoft.azure.v2.management.storage.StorageAccount;
 import com.microsoft.azure.v2.management.storage.StorageAccountKey;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;

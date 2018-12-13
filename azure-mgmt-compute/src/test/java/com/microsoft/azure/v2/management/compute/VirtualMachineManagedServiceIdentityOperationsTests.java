@@ -19,6 +19,7 @@ import com.microsoft.azure.v2.management.storage.StorageAccount;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import io.reactivex.Observable;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class VirtualMachineManagedServiceIdentityOperationsTests extends ComputeManagementTest {
